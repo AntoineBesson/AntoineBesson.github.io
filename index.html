@@ -19,7 +19,7 @@
       <a href="#hero" class="navbar__logo">AB</a>
 
       <nav class="navbar__links" id="navLinks">
-        <a href="#about" class="navbar__link">About</a>
+        <a href="#education" class="navbar__link">Education</a>
         <a href="#projects" class="navbar__link">Projects</a>
         <a href="#experience" class="navbar__link">Experience</a>
         <a href="#skills" class="navbar__link">Skills</a>
@@ -96,11 +96,80 @@
     </div>
   </section>
 
-  <!-- ===================== ABOUT ===================== -->
-  <section class="section" id="about">
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="section" id="education">
     <div class="section__container">
-      <h2 class="section__title">About</h2>
-      <p class="section__placeholder">Content coming soon&hellip;</p>
+      <h2 class="section__title">Education</h2>
+
+      <div class="timeline">
+
+        <!-- ——— Entry 1 ——— -->
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">2023 &mdash; 2026</span>
+            <h3 class="timeline__heading">Institut Polytechnique T&eacute;l&eacute;com Paris</h3>
+            <p class="timeline__degree">Master of Engineering &mdash; Data Science &amp; AI</p>
+            <div class="timeline__details">
+              <p class="timeline__description">
+                <!-- Customise: add a short overview paragraph here -->
+                Specialisation in machine learning, deep learning, and large-scale data systems.
+              </p>
+              <ul class="timeline__courses">
+                <!-- Customise: add / remove courses as needed -->
+                <li>Machine Learning &amp; Deep Learning</li>
+                <li>Statistical Modelling &amp; Inference</li>
+                <li>Natural Language Processing</li>
+                <li>Computer Vision</li>
+                <li>Big Data &amp; Distributed Computing</li>
+                <li>Optimisation &amp; Operations Research</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— Entry 2 ——— -->
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">2021 &mdash; 2023</span>
+            <h3 class="timeline__heading">IPESUP</h3>
+            <p class="timeline__degree">Preparatory Classes &mdash; MPSI / MP*</p>
+            <div class="timeline__details">
+              <p class="timeline__description">
+                <!-- Customise: add a short overview paragraph here -->
+                Intensive two-year programme in advanced mathematics, physics, and computer science preparing for the Grandes &Eacute;coles entrance examinations.
+              </p>
+              <ul class="timeline__courses">
+                <!-- Customise: add / remove courses as needed -->
+                <li>Advanced Mathematics (Algebra, Analysis, Topology)</li>
+                <li>Classical &amp; Quantum Physics</li>
+                <li>Algorithms &amp; Data Structures</li>
+                <li>Probability &amp; Statistics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— Template: copy this block to add more entries ———
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">YYYY &mdash; YYYY</span>
+            <h3 class="timeline__heading">Institution Name</h3>
+            <p class="timeline__degree">Degree / Programme</p>
+            <div class="timeline__details">
+              <p class="timeline__description">Short overview&hellip;</p>
+              <ul class="timeline__courses">
+                <li>Course 1</li>
+                <li>Course 2</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        ——— end template ——— -->
+
+      </div>
     </div>
   </section>
 
@@ -108,7 +177,93 @@
   <section class="section section--alt" id="projects">
     <div class="section__container">
       <h2 class="section__title">Projects</h2>
-      <p class="section__placeholder">Content coming soon&hellip;</p>
+
+      <div class="projects-grid">
+
+        <!-- ——— Card 1 ——— -->
+        <article class="project-card" tabindex="0">
+          <div class="project-card__summary">
+            <h3 class="project-card__title">Multi-Strategy Trading Bot</h3>
+            <p class="project-card__desc">
+              High-performance algorithmic trading system combining multiple quantitative strategies with a vectorised backtesting engine.
+            </p>
+            <div class="project-card__tags">
+              <span class="tag">Python</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Docker</span>
+            </div>
+            <span class="project-card__toggle">View details
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-card__details">
+            <ul>
+              <li><strong>2 000&times; backtesting acceleration</strong> via a fully vectorised NumPy engine, eliminating row-level iteration.</li>
+              <li>Implemented <strong>Hidden Markov Models</strong> for regime detection, dynamically switching between momentum, mean-reversion, and risk-off strategies.</li>
+              <li>Containerised with Docker for reproducible deployment across cloud instances.</li>
+              <!-- Customise: add more bullet points as needed -->
+            </ul>
+          </div>
+        </article>
+
+        <!-- ——— Card 2 ——— -->
+        <article class="project-card" tabindex="0">
+          <div class="project-card__summary">
+            <h3 class="project-card__title">Real-Time Hand Gesture Recognition</h3>
+            <p class="project-card__desc">
+              Lightweight deep-learning model for classifying hand gestures in real time directly on CPU.
+            </p>
+            <div class="project-card__tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">OpenCV</span>
+            </div>
+            <span class="project-card__toggle">View details
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-card__details">
+            <ul>
+              <li>Achieved <strong>93.6 % classification accuracy</strong> on a custom gesture dataset with a compact CNN architecture.</li>
+              <li><strong>Real-time CPU inference under 10 ms</strong> per frame using MediaPipe hand-landmark extraction and an optimised PyTorch model.</li>
+              <li>Integrated OpenCV video pipeline for live webcam demonstration and data collection.</li>
+              <!-- Customise: add more bullet points as needed -->
+            </ul>
+          </div>
+        </article>
+
+        <!-- ——— Template: copy this block to add more project cards ———
+        <article class="project-card" tabindex="0">
+          <div class="project-card__summary">
+            <h3 class="project-card__title">Project Title</h3>
+            <p class="project-card__desc">Short project summary&hellip;</p>
+            <div class="project-card__tags">
+              <span class="tag">Tech1</span>
+              <span class="tag">Tech2</span>
+            </div>
+            <span class="project-card__toggle">View details
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-card__details">
+            <ul>
+              <li>Detail 1</li>
+              <li>Detail 2</li>
+            </ul>
+          </div>
+        </article>
+        ——— end template ——— -->
+
+      </div>
     </div>
   </section>
 

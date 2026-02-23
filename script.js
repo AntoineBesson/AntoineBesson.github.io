@@ -74,4 +74,28 @@
   }, observerOptions);
 
   sections.forEach((section) => observer.observe(section));
+
+  // ———————————— Project Card Expand / Collapse ————————————
+  const projectCards = document.querySelectorAll(".project-card");
+
+  projectCards.forEach((card) => {
+    const toggle = card.querySelector(".project-card__toggle");
+    if (!toggle) return;
+
+    function flipCard() {
+      const isOpen = card.classList.toggle("open");
+      toggle.childNodes[0].textContent = isOpen ? "Hide details " : "View details ";
+    }
+
+    // Click anywhere on the card summary or the toggle
+    card.querySelector(".project-card__summary").addEventListener("click", flipCard);
+
+    // Keyboard: Enter or Space
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        flipCard();
+      }
+    });
+  });
 })();
