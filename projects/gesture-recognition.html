@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Real-Time Hand Gesture Recognition — Antoine Besson" />
-  <title>Hand Gesture Recognition | Antoine Besson</title>
+  <meta name="description" content="NeuroCalc: Dual Hands Arithmetic Recognition — Antoine Besson" />
+  <title>NeuroCalc | Antoine Besson</title>
   <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +12,6 @@
 </head>
 <body>
 
-  <!-- Minimal navbar with back link + theme toggle -->
   <header class="navbar" id="navbar">
     <div class="navbar__container">
       <a href="../index.html" class="navbar__logo">&larr; Back</a>
@@ -39,57 +38,66 @@
     <div class="project-detail__container">
 
       <div class="project-detail__tags">
-        <span class="tag">PyTorch</span>
+        <span class="tag">PyTorch 2.0</span>
         <span class="tag">MediaPipe</span>
-        <span class="tag">OpenCV</span>
+        <span class="tag">ST-GCN</span>
       </div>
 
-      <h1 class="project-detail__title">Real-Time Hand Gesture Recognition</h1>
+      <h1 class="project-detail__title">NeuroCalc: Dual Hands Arithmetic Recognition</h1>
 
       <p class="project-detail__intro">
-        A lightweight deep-learning pipeline that classifies hand gestures in real time
-        directly on CPU, suitable for interactive applications and accessibility tools.
+        A computer vision system capable of recognizing dynamic arithmetic operations performed by human hands in real-time, achieving 93.65% validation accuracy using Spatio-Temporal Graph Convolutional Networks on MediaPipe hand landmarks.
       </p>
 
-      <!-- ——— Customise the sections below ——— -->
+      <figure class="project-detail__figure">
+        <img src="assets/neuro_calc_exemple.png" alt="NeuroCalc live inference example — recognising hand gestures as arithmetic operations" />
+      </figure>
 
       <section class="project-detail__section">
-        <h2>Overview</h2>
+        <h2>Abstract</h2>
         <p>
-          The system extracts 21 hand landmarks using MediaPipe, normalises them into a
-          feature vector, and feeds them into a compact CNN trained with PyTorch. An OpenCV
-          pipeline handles video capture, overlay rendering, and frame-rate management.
+          NeuroCalc is a real-time hand gesture recognition system that interprets arithmetic operations (digits 0–9 and operators +, −, ×, ÷, =) performed with both hands in front of a webcam. The hands are modelled as a dynamic graph of 42 vertices extracted by MediaPipe, projected into a canonical rotation-invariant reference frame, and classified by a Spatio-Temporal Graph Convolutional Network (ST-GCN). The system reaches 93.65% validation accuracy on a custom 15-class dataset and runs at 30 FPS on CPU thanks to an asynchronous strided inference engine that reduces compute load by approximately 75%.
         </p>
       </section>
 
       <section class="project-detail__section">
-        <h2>Key Achievements</h2>
-        <ul>
-          <li><strong>93.6 % classification accuracy</strong> on a custom gesture dataset with a compact CNN architecture.</li>
-          <li><strong>Real-time CPU inference &lt; 10 ms</strong> per frame, enabling smooth 30+ FPS live demos.</li>
-          <li>End-to-end OpenCV pipeline for live webcam capture, data collection, and visual feedback.</li>
-        </ul>
-      </section>
-
-      <section class="project-detail__section">
-        <h2>Model Architecture</h2>
+        <h2>Motivation</h2>
         <p>
-          <!-- Customise: describe your model layers, input shape, training details -->
-          The classifier is a three-layer 1-D CNN operating on the 63-dimensional landmark
-          vector (21 points &times; 3 coordinates). Batch normalisation and dropout are used
-          between layers. Training was performed for 50 epochs with an Adam optimiser and
-          a cosine-annealing learning rate schedule.
+          This project is my second time tackling an image/video ML model. In my previous project, I used a standard CNN with a public dataset to recognise characters on a licence plate. Standard Convolutional Neural Networks struggle with dynamic hand gestures due to high variance in camera distance and orientation. I wanted to explore a fundamentally different approach: treating the hands as a graph rather than a grid of pixels.
+        </p>
+        <p>
+          By projecting the data into a canonical reference frame before it reaches the neural network, I drastically reduced the complexity of the learning manifold. I also built my own dataset from scratch — 21 videos per character across 15 classes (digits and operators) — to have full control over the training distribution and to practise the end-to-end ML pipeline.
         </p>
       </section>
 
       <section class="project-detail__section">
-        <h2>Lessons Learned</h2>
+        <h2>Implementation</h2>
+        <h3>Geometric Kernel — Unified Scene Projection</h3>
         <p>
-          <!-- Customise: reflect on challenges and takeaways -->
-          Landmark normalisation relative to the wrist was the single most impactful
-          preprocessing step — it made the model invariant to hand position and distance
-          from the camera, improving generalisation across users.
+          Raw coordinates are sensitive to the user's position, so the Geometric Kernel anchors the coordinate system to the dominant hand's wrist using Gram-Schmidt orthogonalisation. This canonicalises the dual-hand topology into a rotation-invariant manifold, effectively decoupling the semantic gesture from the user's global orientation.
         </p>
+        <h3>Adaptive Graph Convolution</h3>
+        <p>
+          To capture semantic relationships between unconnected joints, the network uses an Adaptive Graph Convolution layer that can "invent" new edges beyond the physical skeleton. This lets the model learn cross-hand relationships (e.g., both index fingers touching for "=").
+        </p>
+        <h3>Temporal Convolution Blocks</h3>
+        <p>
+          Temporal evolution is handled by interleaved TCN blocks with dilated convolutions. These give the network a wide receptive field over time, which helps distinguish between static digits and dynamic signs like "Minus" (a sweeping motion).
+        </p>
+        <h3>Asynchronous Strided Inference</h3>
+        <p>
+          To maintain a smooth 30 FPS UI, the inference engine runs the ST-GCN on every N-th frame in a background thread, reducing CPU load by approximately 75% while the main thread continues rendering the webcam feed and overlay.
+        </p>
+      </section>
+
+      <section class="project-detail__section">
+        <h2>How to Use It</h2>
+        <ol>
+          <li>Clone the repository and install dependencies:<br><code>cd neuro_calc<br>poetry install</code></li>
+          <li>Record your own hand gesture data (or skip to step 4 to use the pre-trained model):<br><code>poetry run python tools/recorder.py</code><br><em>Use SPACE to record, N/P to switch classes, Q to quit.</em></li>
+          <li>Train the model:<br><code>poetry run python train.py</code></li>
+          <li>Run live inference:<br><code>poetry run python inference.py</code></li>
+        </ol>
       </section>
 
     </div>
