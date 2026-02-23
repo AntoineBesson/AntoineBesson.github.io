@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="All Projects — Antoine Besson" />
+  <title>All Projects | Antoine Besson</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="../index.html" class="navbar__logo">Antoine Besson</a>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="allprojects-hero">
+    <div class="allprojects-hero__container">
+      <a href="../index.html" class="allprojects-hero__back">&larr; Back to home</a>
+      <h1 class="allprojects-hero__title">All Projects</h1>
+      <p class="allprojects-hero__subtitle">
+        A comprehensive collection of my work in AI, Computer Vision, and Applied Mathematics.
+      </p>
+    </div>
+  </section>
+
+  <section class="allprojects-list">
+    <div class="allprojects-list__container">
+
+      <!-- ——— Card: NeuroCalc ——— -->
+      <a href="gesture-recognition.html" class="allprojects-card">
+        <div class="allprojects-card__thumb">
+          <img src="assets/neuro_calc_exemple.png" alt="NeuroCalc — real-time hand gesture arithmetic recognition" />
+        </div>
+        <div class="allprojects-card__body">
+          <p class="allprojects-card__tags">PYTORCH 2.0, MEDIAPIPE, ST-GCN</p>
+          <h2 class="allprojects-card__title">NeuroCalc: Dual Hands Arithmetic Recognition</h2>
+          <p class="allprojects-card__desc">
+            A real-time hand gesture recognition system that interprets arithmetic operations performed with both hands, achieving 93.65% accuracy using Spatio-Temporal Graph Convolutional Networks.
+          </p>
+          <span class="allprojects-card__date">Jan 2026</span>
+        </div>
+      </a>
+
+      <!-- ——— Card: Trading Bot ——— -->
+      <a href="trading-bot.html" class="allprojects-card">
+        <div class="allprojects-card__thumb">
+          <img src="assets/trading-bot-cover.png" alt="Multi-Strategy Trading Bot" />
+        </div>
+        <div class="allprojects-card__body">
+          <p class="allprojects-card__tags">PYTHON, NUMPY, DOCKER</p>
+          <h2 class="allprojects-card__title">Multi-Strategy Trading Bot</h2>
+          <p class="allprojects-card__desc">
+            A high-performance algorithmic trading system combining multiple quantitative strategies with a fully vectorised backtesting engine achieving 2,000&times; acceleration.
+          </p>
+          <span class="allprojects-card__date">Sep 2025</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copy">&copy; 2026 Antoine Besson. All rights reserved.</p>
+      <p class="footer__tech">Built with Next.js and Tailwind CSS</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
