@@ -3,33 +3,33 @@
    =================================================== */
 :root,
 [data-theme="light"] {
-  --clr-bg:          #f9fafb;
-  --clr-bg-alt:      #f1f3f5;
-  --clr-surface:     #ffffff;
-  --clr-text:        #1a1a2e;
-  --clr-text-muted:  #6b7280;
-  --clr-heading:     #111827;
-  --clr-accent:      #4f46e5;
-  --clr-accent-hover:#4338ca;
-  --clr-border:      #e5e7eb;
-  --clr-nav-bg:      rgba(255, 255, 255, 0.85);
-  --shadow-sm:       0 1px 2px rgba(0,0,0,.06);
-  --shadow-md:       0 4px 12px rgba(0,0,0,.08);
+  --clr-bg:          #faf7f2;
+  --clr-bg-alt:      #f3efe8;
+  --clr-surface:     #fffdf9;
+  --clr-text:        #2c2a28;
+  --clr-text-muted:  #7a756e;
+  --clr-heading:     #1e1c1a;
+  --clr-accent:      #5b6abf;
+  --clr-accent-hover:#4a58a8;
+  --clr-border:      #e4dfd7;
+  --clr-nav-bg:      rgba(250, 247, 242, 0.88);
+  --shadow-sm:       0 1px 3px rgba(44,42,40,.05);
+  --shadow-md:       0 4px 14px rgba(44,42,40,.08);
 }
 
 [data-theme="dark"] {
-  --clr-bg:          #0f111a;
-  --clr-bg-alt:      #161927;
-  --clr-surface:     #1c1f2e;
-  --clr-text:        #e2e8f0;
-  --clr-text-muted:  #94a3b8;
-  --clr-heading:     #f1f5f9;
-  --clr-accent:      #818cf8;
-  --clr-accent-hover:#6366f1;
-  --clr-border:      #2d3348;
-  --clr-nav-bg:      rgba(15, 17, 26, 0.85);
-  --shadow-sm:       0 1px 2px rgba(0,0,0,.3);
-  --shadow-md:       0 4px 12px rgba(0,0,0,.4);
+  --clr-bg:          #121318;
+  --clr-bg-alt:      #1a1b22;
+  --clr-surface:     #22232c;
+  --clr-text:        #d9d5cf;
+  --clr-text-muted:  #9b978f;
+  --clr-heading:     #edeae5;
+  --clr-accent:      #8b98e8;
+  --clr-accent-hover:#7684d6;
+  --clr-border:      #32333d;
+  --clr-nav-bg:      rgba(18, 19, 24, 0.88);
+  --shadow-sm:       0 1px 3px rgba(0,0,0,.25);
+  --shadow-md:       0 4px 14px rgba(0,0,0,.35);
 }
 
 /* ===================================================
@@ -204,6 +204,7 @@ img {
    Hero Section
    =================================================== */
 .hero {
+  position: relative;
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
@@ -211,9 +212,22 @@ img {
   padding: 4rem 1.5rem;
   background: var(--clr-bg);
   transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+/* Interactive neural-network canvas behind hero text */
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;        /* let clicks pass through to buttons */
 }
 
 .hero__content {
+  position: relative;
+  z-index: 1;
   max-width: 680px;
   text-align: center;
 }
@@ -519,8 +533,8 @@ img {
    =================================================== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1.75rem;
 }
 
 .project-card {
@@ -544,21 +558,21 @@ img {
 }
 
 .project-card__summary {
-  padding: 1.5rem 1.75rem 1.25rem;
+  padding: 1.75rem 2rem 1.5rem;
 }
 
 .project-card__title {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--clr-heading);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .project-card__desc {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   color: var(--clr-text-muted);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.65;
+  margin-bottom: 1.15rem;
 }
 
 .project-card__tags {
@@ -594,10 +608,10 @@ img {
 .project-card__highlights li {
   position: relative;
   padding-left: 1.1rem;
-  margin-bottom: 0.45rem;
-  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
   color: var(--clr-text);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .project-card__highlights li::before {
@@ -923,15 +937,6 @@ img {
 
   .project-card__summary {
     padding: 1.25rem;
-  }
-
-  .project-card__details {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .project-card.open .project-card__details {
-    padding: 1rem 1.25rem 1.25rem;
   }
 
   /* About section stacks on mobile */
