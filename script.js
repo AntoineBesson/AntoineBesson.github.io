@@ -33,69 +33,51 @@
   // Set initial theme immediately (avoids flash)
   setTheme(getInitialTheme());
 
-  themeToggle.addEventListener("click", () => {
-    const current = html.getAttribute("data-theme");
-    setTheme(current === "dark" ? "light" : "dark");
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const current = html.getAttribute("data-theme");
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+  }
 
   // ———————————————— Mobile Menu ————————————————
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("open");
-    navLinks.classList.toggle("open");
-  });
-
-  // Close mobile menu when a link is clicked
-  links.forEach((link) => {
-    link.addEventListener("click", () => {
-      hamburger.classList.remove("open");
-      navLinks.classList.remove("open");
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navLinks.classList.toggle("open");
     });
-  });
+
+    // Close mobile menu when a link is clicked
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("open");
+        navLinks.classList.remove("open");
+      });
+    });
+  }
 
   // ———————————— Active Link on Scroll ————————————
-  const observerOptions = {
-    root: null,
-    rootMargin: "-40% 0px -60% 0px",
-    threshold: 0,
-  };
+  if (sections.length && links.length) {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -60% 0px",
+      threshold: 0,
+    };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-        links.forEach((link) => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${id}`
-          );
-        });
-      }
-    });
-  }, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          links.forEach((link) => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${id}`
+            );
+          });
+        }
+      });
+    }, observerOptions);
 
-  sections.forEach((section) => observer.observe(section));
-
-  // ———————————— Project Card Expand / Collapse ————————————
-  const projectCards = document.querySelectorAll(".project-card");
-
-  projectCards.forEach((card) => {
-    const toggle = card.querySelector(".project-card__toggle");
-    if (!toggle) return;
-
-    function flipCard() {
-      const isOpen = card.classList.toggle("open");
-      toggle.childNodes[0].textContent = isOpen ? "Hide details " : "View details ";
-    }
-
-    // Click anywhere on the card summary or the toggle
-    card.querySelector(".project-card__summary").addEventListener("click", flipCard);
-
-    // Keyboard: Enter or Space
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        flipCard();
-      }
-    });
-  });
+    sections.forEach((section) => observer.observe(section));
+  }
 })();

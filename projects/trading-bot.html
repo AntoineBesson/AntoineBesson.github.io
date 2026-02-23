@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Multi-Strategy Trading Bot — Antoine Besson" />
+  <title>Multi-Strategy Trading Bot | Antoine Besson</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Minimal navbar with back link + theme toggle -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="../index.html" class="navbar__logo">&larr; Back</a>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-detail">
+    <div class="project-detail__container">
+
+      <div class="project-detail__tags">
+        <span class="tag">Python</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Docker</span>
+      </div>
+
+      <h1 class="project-detail__title">Multi-Strategy Trading Bot</h1>
+
+      <p class="project-detail__intro">
+        A high-performance algorithmic trading system combining multiple quantitative strategies
+        with a fully vectorised backtesting engine.
+      </p>
+
+      <!-- ——— Customise the sections below ——— -->
+
+      <section class="project-detail__section">
+        <h2>Overview</h2>
+        <p>
+          This project implements a modular trading framework that runs momentum, mean-reversion,
+          and risk-off strategies concurrently. A Hidden Markov Model detects market regimes in
+          real time and dynamically allocates capital across the active strategies.
+        </p>
+      </section>
+
+      <section class="project-detail__section">
+        <h2>Key Achievements</h2>
+        <ul>
+          <li><strong>2 000&times; backtesting acceleration</strong> — replaced iterative row-level simulation with a fully vectorised NumPy engine.</li>
+          <li><strong>Hidden Markov Models</strong> for regime detection, enabling dynamic strategy switching between trending and ranging markets.</li>
+          <li>Containerised with <strong>Docker</strong> for one-command reproducible deployment on any cloud instance.</li>
+        </ul>
+      </section>
+
+      <section class="project-detail__section">
+        <h2>Architecture</h2>
+        <p>
+          <!-- Customise: describe your system architecture, add diagrams or images -->
+          The system is split into three layers: data ingestion (REST + WebSocket feeds), strategy
+          engine (signal generation &amp; portfolio optimisation), and execution (order management
+          &amp; risk controls). Each layer communicates via an internal event bus.
+        </p>
+      </section>
+
+      <section class="project-detail__section">
+        <h2>Lessons Learned</h2>
+        <p>
+          <!-- Customise: reflect on challenges and takeaways -->
+          Vectorising financial simulations required rethinking the entire data flow to eliminate
+          Python-level loops. Profiling with line_profiler was essential to identify the remaining
+          bottlenecks after the initial rewrite.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copy">&copy; 2026 Antoine Besson</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
