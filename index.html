@@ -6,17 +6,16 @@
   <meta name="description" content="Antoine Besson — Data Science & AI Engineer. Portfolio showcasing projects, experience, and skills." />
   <title>Antoine Besson | Data Science &amp; AI Engineer</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts – Inter for a clean, modern feel -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- ===================== NAVBAR ===================== -->
   <header class="navbar" id="navbar">
     <div class="navbar__container">
-      <a href="#hero" class="navbar__logo">Antoine Besson</a>
+      <a href="#hero" class="navbar__logo">A. Besson</a>
 
       <nav class="navbar__links" id="navLinks">
         <a href="#about" class="navbar__link">About</a>
@@ -27,9 +26,8 @@
       </nav>
 
       <div class="navbar__actions">
-        <!-- Theme toggle -->
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1" x2="12" y2="3"/>
@@ -41,13 +39,11 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
-          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
           </svg>
         </button>
-
-        <!-- Mobile hamburger -->
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -57,77 +53,74 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero">
-    <canvas class="hero__canvas" id="neuralCanvas"></canvas>
-    <div class="hero__content">
-      <p class="hero__greeting">Hello there ! I am</p>
-      <h1 class="hero__name">Antoine Besson</h1>
-      <h2 class="hero__title">Data Science &amp; AI Engineer</h2>
-      <p class="hero__subtitle">
-        Building intelligent systems and turning data into actionable insights.
-      </p>
-      <div class="hero__buttons">
-        <a href="mailto:antoine.besson@telecom-paris.fr" class="btn btn--primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          Email Me
-        </a>
-        <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-          </svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/AntoineBesson" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35
-                     6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0
-                     19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65
-                     5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0
-                     0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9
-                     18.13V22"/>
-          </svg>
-          GitHub
-        </a>
+    <div class="hero__container">
+
+      <div class="hero__meta">
+        <span>Portfolio &mdash; 2026</span>
+        <span class="hero__meta-dot"></span>
+        <span>T&eacute;l&eacute;com Paris MSc AI</span>
       </div>
+
+      <div class="hero__body">
+        <div class="hero__name-block">
+          <h1 class="hero__name">Antoine<br>Besson</h1>
+          <div class="hero__discipline-block">
+            <span class="hero__accent-bar"></span>
+            <p class="hero__discipline">Data Science<br>&amp; Artificial<br>Intelligence</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__footer">
+        <p class="hero__statement">
+          Building rigorous systems at the intersection of<br>
+          mathematics, machine learning, and quantitative finance.
+        </p>
+        <div class="hero__cta">
+          <a href="mailto:antoine.besson@telecom-paris.fr" class="btn btn--primary">
+            Contact
+          </a>
+          <a href="https://github.com/AntoineBesson" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
     </div>
+    <div class="hero__index-number" aria-hidden="true">00</div>
   </section>
 
   <!-- ===================== ABOUT ===================== -->
-  <section class="section section--alt" id="about">
+  <section class="section" id="about">
     <div class="section__container">
-      <h2 class="section__title">About</h2>
+      <header class="section__header">
+        <span class="section__number" aria-hidden="true">01</span>
+        <h2 class="section__title">About</h2>
+      </header>
       <div class="about__grid">
         <div class="about__image-wrapper">
-          <!-- Replace src with your photo: assets/photo.jpg or any path -->
           <img
             src="assets/photo_cv_11_02_2026_compressée (1).jpg"
             alt="Antoine Besson"
             class="about__image"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           />
-          <!-- Fallback placeholder shown when no image file exists -->
           <div class="about__image-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
             </svg>
-            <span>Add your photo</span>
           </div>
         </div>
         <div class="about__text">
           <p>
-            <!-- Customise: write your personal introduction here -->
             I am a Data Science &amp; AI Engineering student at T&eacute;l&eacute;com Paris with a strong foundation in mathematics from MPSI/MP* preparatory classes. I am passionate about building intelligent systems that solve real-world problems.
           </p>
           <p>
-            <!-- Customise: add more paragraphs as needed -->
             My interests span machine learning, quantitative finance, and computer vision. I enjoy turning complex data into actionable insights and shipping production-ready solutions.
           </p>
         </div>
@@ -138,324 +131,195 @@
   <!-- ===================== EDUCATION ===================== -->
   <section class="section" id="education">
     <div class="section__container">
-      <h2 class="section__title">Education</h2>
+      <header class="section__header">
+        <span class="section__number" aria-hidden="true">02</span>
+        <h2 class="section__title">Education</h2>
+      </header>
 
-      <div class="timeline">
+      <div class="edu-table">
 
-        <!-- ——— Entry 1 ——— -->
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">2023 &mdash; 2026</span>
-            <h3 class="timeline__heading">Institut Polytechnique T&eacute;l&eacute;com Paris</h3>
-            <p class="timeline__degree">Master of Engineering &mdash; Data Science &amp; AI</p>
-            <div class="timeline__details">
-              <p class="timeline__description">
-                <!-- Customise: add a short overview paragraph here -->
-                Specialisation in machine learning, deep learning, and large-scale data systems.
-              </p>
-              <ul class="timeline__courses">
-                <!-- Customise: add / remove courses as needed -->
-                <li>Machine Learning &amp; Deep Learning</li>
-                <li>Statistical Modelling &amp; Inference</li>
-                <li>Natural Language Processing</li>
-                <li>Computer Vision</li>
-                <li>Big Data &amp; Distributed Computing</li>
-                <li>Optimisation &amp; Operations Research</li>
-              </ul>
-            </div>
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">2023 &mdash; 2026</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">Institut Polytechnique T&eacute;l&eacute;com Paris</h3>
+            <p class="edu-table__degree">Master of Engineering &mdash; Data Science &amp; AI</p>
+            <p class="edu-table__description">Specialisation in machine learning, deep learning, and large-scale data systems.</p>
+            <ul class="edu-table__courses">
+              <li>Machine Learning &amp; Deep Learning</li>
+              <li>Statistical Modelling &amp; Inference</li>
+              <li>Natural Language Processing</li>
+              <li>Computer Vision</li>
+              <li>Big Data &amp; Distributed Computing</li>
+              <li>Optimisation &amp; Operations Research</li>
+            </ul>
           </div>
         </div>
 
-        <!-- ——— Entry 2 ——— -->
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">2021 &mdash; 2023</span>
-            <h3 class="timeline__heading">IPESUP</h3>
-            <p class="timeline__degree">Preparatory Classes &mdash; MPSI / MP*</p>
-            <div class="timeline__details">
-              <p class="timeline__description">
-                <!-- Customise: add a short overview paragraph here -->
-                Intensive two-year programme in advanced mathematics, physics, and computer science preparing for the Grandes &Eacute;coles entrance examinations.
-              </p>
-              <ul class="timeline__courses">
-                <!-- Customise: add / remove courses as needed -->
-                <li>Advanced Mathematics (Algebra, Analysis, Topology)</li>
-                <li>Classical &amp; Quantum Physics</li>
-                <li>Algorithms &amp; Data Structures</li>
-                <li>Probability &amp; Statistics</li>
-              </ul>
-            </div>
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">2021 &mdash; 2023</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">IPESUP</h3>
+            <p class="edu-table__degree">Preparatory Classes &mdash; MPSI / MP*</p>
+            <p class="edu-table__description">Intensive two-year programme in advanced mathematics, physics, and computer science preparing for the Grandes &Eacute;coles entrance examinations.</p>
+            <ul class="edu-table__courses">
+              <li>Advanced Mathematics (Algebra, Analysis, Topology)</li>
+              <li>Classical &amp; Quantum Physics</li>
+              <li>Algorithms &amp; Data Structures</li>
+              <li>Probability &amp; Statistics</li>
+            </ul>
           </div>
         </div>
-
-        <!-- ——— Template: copy this block to add more entries ———
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">YYYY &mdash; YYYY</span>
-            <h3 class="timeline__heading">Institution Name</h3>
-            <p class="timeline__degree">Degree / Programme</p>
-            <div class="timeline__details">
-              <p class="timeline__description">Short overview&hellip;</p>
-              <ul class="timeline__courses">
-                <li>Course 1</li>
-                <li>Course 2</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        ——— end template ——— -->
 
       </div>
     </div>
   </section>
 
   <!-- ===================== PROJECTS ===================== -->
-  <section class="section section--alt" id="projects">
+  <section class="section" id="projects">
     <div class="section__container">
-      <h2 class="section__title">Projects</h2>
+      <header class="section__header">
+        <span class="section__number" aria-hidden="true">03</span>
+        <h2 class="section__title">Projects</h2>
+      </header>
 
-      <div class="projects-grid">
+      <div class="projects-table">
+        <div class="projects-table__header">
+          <span class="projects-table__col-label">Project</span>
+          <span class="projects-table__col-label">Stack</span>
+          <span class="projects-table__col-label">Year</span>
+        </div>
 
-        <!-- ——— Card 1 ——— -->
-        <article class="project-card">
-          <div class="project-card__summary">
-            <h3 class="project-card__title">Multi-Strategy Trading Bot</h3>
-            <p class="project-card__desc">
-              High-performance algorithmic trading system combining multiple quantitative strategies with a vectorised backtesting engine.
-            </p>
-            <ul class="project-card__highlights">
-              <li><strong>2 000&times;</strong> backtesting acceleration via vectorised NumPy engine</li>
-              <li><strong>Hidden Markov Models</strong> for regime detection &amp; dynamic strategy switching</li>
-              <li>Containerised with Docker for reproducible cloud deployment</li>
-            </ul>
-            <div class="project-card__tags">
-              <span class="tag">Python</span>
-              <span class="tag">NumPy</span>
-              <span class="tag">Docker</span>
+        <a href="projects/trading-bot.html" class="projects-table__row">
+          <div class="projects-table__name">
+            <span class="projects-table__index">01</span>
+            <div>
+              <h3 class="projects-table__title">Multi-Strategy Trading Bot</h3>
+              <p class="projects-table__desc">Quantitative trading framework with Heston stochastic volatility model and vectorised backtesting engine achieving 2,000&times; acceleration.</p>
             </div>
-            <a href="projects/trading-bot.html" class="project-card__link">
-              Read more
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
           </div>
-        </article>
+          <div class="projects-table__tech">
+            <span class="ptag">Python</span>
+            <span class="ptag">NumPy</span>
+            <span class="ptag">Docker</span>
+          </div>
+          <div class="projects-table__year">2025</div>
+        </a>
 
-        <!-- ——— Card 2 ——— -->
-        <article class="project-card">
-          <div class="project-card__summary">
-            <h3 class="project-card__title">Real-Time Hand Gesture Recognition</h3>
-            <p class="project-card__desc">
-              Lightweight deep-learning model for classifying hand gestures in real time directly on CPU.
-            </p>
-            <ul class="project-card__highlights">
-              <li><strong>93.6 %</strong> classification accuracy on custom gesture dataset</li>
-              <li>Real-time CPU inference <strong>&lt; 10 ms</strong> per frame</li>
-              <li>Live webcam pipeline with OpenCV for demo &amp; data collection</li>
-            </ul>
-            <div class="project-card__tags">
-              <span class="tag">PyTorch</span>
-              <span class="tag">MediaPipe</span>
-              <span class="tag">OpenCV</span>
+        <a href="projects/gesture-recognition.html" class="projects-table__row">
+          <div class="projects-table__name">
+            <span class="projects-table__index">02</span>
+            <div>
+              <h3 class="projects-table__title">Real-Time Hand Gesture Recognition</h3>
+              <p class="projects-table__desc">ST-GCN model for dual-hand arithmetic gesture classification. 93.6% accuracy, &lt;10ms CPU inference per frame via asynchronous strided inference.</p>
             </div>
-            <a href="projects/gesture-recognition.html" class="project-card__link">
-              Read more
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
           </div>
-        </article>
-
-        <!-- ——— Template: copy this block to add more project cards ———
-        <article class="project-card">
-          <div class="project-card__summary">
-            <h3 class="project-card__title">Project Title</h3>
-            <p class="project-card__desc">Short summary&hellip;</p>
-            <ul class="project-card__highlights">
-              <li>Key achievement 1</li>
-              <li>Key achievement 2</li>
-            </ul>
-            <div class="project-card__tags">
-              <span class="tag">Tech1</span>
-              <span class="tag">Tech2</span>
-            </div>
-            <a href="projects/your-project.html" class="project-card__link">
-              Read more
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
+          <div class="projects-table__tech">
+            <span class="ptag">PyTorch</span>
+            <span class="ptag">MediaPipe</span>
+            <span class="ptag">ST-GCN</span>
           </div>
-        </article>
-        ——— end template ——— -->
+          <div class="projects-table__year">2026</div>
+        </a>
 
       </div>
 
-      <div style="text-align:center;margin-top:2rem;">
-        <a href="projects/index.html" class="project-card__link" style="font-size:0.95rem;">
-          View all projects
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
+      <div class="projects-table__footer">
+        <a href="projects/index.html" class="link-arrow">
+          View all projects &#8594;
         </a>
       </div>
+
     </div>
   </section>
 
   <!-- ===================== EXPERIENCE ===================== -->
   <section class="section" id="experience">
     <div class="section__container">
-      <h2 class="section__title">Experience</h2>
+      <header class="section__header">
+        <span class="section__number" aria-hidden="true">04</span>
+        <h2 class="section__title">Experience</h2>
+      </header>
 
-      <div class="timeline">
+      <div class="edu-table">
 
-        <!-- ——— Entry 1 ——— -->
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">November 2024 &mdash; February 2026</span>
-            <h3 class="timeline__heading">Treasurer &mdash; Forum T&eacute;l&eacute;com Paris</h3>
-            <p class="timeline__degree">Student Organisation &mdash; T&eacute;l&eacute;com Paris</p>
-            <div class="timeline__details">
-              <p class="timeline__description">
-                Led the financial strategy for the largest student-run corporate networking event at T&eacute;l&eacute;com Paris.
-              </p>
-              <ul class="timeline__highlights">
-                <li>Drove a <strong>30 % increase in sponsorship revenue</strong> by restructuring partnership tiers and outreach strategy.</li>
-                <li>Achieved a <strong>50 % reduction in operational costs</strong> through vendor renegotiation and streamlined budgeting.</li>
-                <li>Managed a <strong>six-figure budget</strong>, delivering full financial reporting to the board.</li>
-                <!-- Customise: add more bullet points as needed -->
-              </ul>
-            </div>
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">Nov 2024 &mdash; Feb 2026</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">Treasurer &mdash; Forum T&eacute;l&eacute;com Paris</h3>
+            <p class="edu-table__degree">Student Organisation &mdash; T&eacute;l&eacute;com Paris</p>
+            <p class="edu-table__description">Led the financial strategy for the largest student-run corporate networking event at T&eacute;l&eacute;com Paris.</p>
+            <ul class="edu-table__highlights">
+              <li>Drove a <strong>30% increase in sponsorship revenue</strong> by restructuring partnership tiers and outreach strategy.</li>
+              <li>Achieved a <strong>50% reduction in operational costs</strong> through vendor renegotiation and streamlined budgeting.</li>
+              <li>Managed a <strong>six-figure budget</strong>, delivering full financial reporting to the board.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- ——— Entry 2 ——— -->
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">Summer 2024</span>
-            <h3 class="timeline__heading">HR Assistant Intern &mdash; BNP Paribas</h3>
-            <p class="timeline__degree">Human Resources Department</p>
-            <div class="timeline__details">
-              <p class="timeline__description">
-                Supported the HR analytics team in modernising internal reporting workflows.
-              </p>
-              <ul class="timeline__highlights">
-                <li><strong>Automated data reporting</strong> pipelines, reducing manual processing time and improving data quality.</li>
-                <!-- Customise: add more bullet points as needed -->
-              </ul>
-            </div>
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">Summer 2024</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">HR Assistant Intern &mdash; BNP Paribas</h3>
+            <p class="edu-table__degree">Human Resources Department</p>
+            <p class="edu-table__description">Supported the HR analytics team in modernising internal reporting workflows.</p>
+            <ul class="edu-table__highlights">
+              <li><strong>Automated data reporting</strong> pipelines, reducing manual processing time and improving data quality.</li>
+            </ul>
           </div>
         </div>
-
-        <!-- ——— Template: copy this block to add more entries ———
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">YYYY &mdash; YYYY</span>
-            <h3 class="timeline__heading">Role &mdash; Company</h3>
-            <p class="timeline__degree">Department / Team</p>
-            <div class="timeline__details">
-              <p class="timeline__description">Overview&hellip;</p>
-              <ul class="timeline__highlights">
-                <li>Achievement 1</li>
-                <li>Achievement 2</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        ——— end template ——— -->
 
       </div>
     </div>
   </section>
 
   <!-- ===================== SKILLS ===================== -->
-  <section class="section section--alt" id="skills">
+  <section class="section" id="skills">
     <div class="section__container">
-      <h2 class="section__title">Skills</h2>
+      <header class="section__header">
+        <span class="section__number" aria-hidden="true">05</span>
+        <h2 class="section__title">Skills</h2>
+      </header>
 
-      <div class="skills__grid">
-
-        <div class="skills__category">
-          <h3 class="skills__category-title">Programming</h3>
-          <div class="skills__pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">OCaml</span>
-            <span class="skill-pill">Java</span>
-            <span class="skill-pill">C</span>
-            <span class="skill-pill">SQL</span>
-          </div>
+      <div class="skills-list">
+        <div class="skills-list__row">
+          <span class="skills-list__cat">Programming</span>
+          <span class="skills-list__items">Python, OCaml, Java, C, SQL</span>
         </div>
-
-        <div class="skills__category">
-          <h3 class="skills__category-title">Data Science</h3>
-          <div class="skills__pills">
-            <span class="skill-pill">PyTorch</span>
-            <span class="skill-pill">Pandas</span>
-            <span class="skill-pill">Scikit-learn</span>
-          </div>
+        <div class="skills-list__row">
+          <span class="skills-list__cat">Data Science</span>
+          <span class="skills-list__items">PyTorch, Pandas, Scikit-learn</span>
         </div>
-
-        <div class="skills__category">
-          <h3 class="skills__category-title">Mathematics</h3>
-          <div class="skills__pills">
-            <span class="skill-pill">Stochastic Calculus</span>
-            <span class="skill-pill">Monte Carlo Methods</span>
-          </div>
+        <div class="skills-list__row">
+          <span class="skills-list__cat">Mathematics</span>
+          <span class="skills-list__items">Stochastic Calculus, Monte Carlo Methods</span>
         </div>
-
-        <div class="skills__category">
-          <h3 class="skills__category-title">Tools</h3>
-          <div class="skills__pills">
-            <span class="skill-pill">Git</span>
-            <span class="skill-pill">Docker</span>
-            <span class="skill-pill">LaTeX</span>
-          </div>
+        <div class="skills-list__row">
+          <span class="skills-list__cat">Tools</span>
+          <span class="skills-list__items">Git, Docker, LaTeX</span>
         </div>
-
       </div>
+
     </div>
   </section>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="footer__container">
-      <p class="footer__copy">&copy; 2026 Antoine Besson. All rights reserved.</p>
-      <p class="footer__tech">Built with Next.js and Tailwind CSS</p>
+      <p class="footer__copy">&copy; 2026 Antoine Besson.</p>
+      <p class="footer__tech">HTML / CSS / JS</p>
       <div class="footer__links">
         <a href="https://github.com/AntoineBesson" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35
-                     6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0
-                     19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65
-                     5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0
-                     0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9
-                     18.13V22"/>
-          </svg>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-          </svg>
+        <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="LinkedIn">
           LinkedIn
         </a>
       </div>
