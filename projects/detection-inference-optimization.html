@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="High-Speed Object Detection & Inference Optimization — Antoine Besson" />
+  <title>Object Detection Inference Optimization | Antoine Besson</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="../index.html" class="navbar__logo">A. Besson</a>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="proj-header">
+    <div class="proj-header__container">
+      <nav class="proj-header__breadcrumb">
+        <a href="../index.html">Antoine Besson</a>
+        <span class="proj-header__breadcrumb-sep" aria-hidden="true">/</span>
+        <a href="index.html">Projects</a>
+        <span class="proj-header__breadcrumb-sep" aria-hidden="true">/</span>
+        <span>Detection Profiling</span>
+      </nav>
+      <div class="proj-header__meta">
+        <span class="proj-header__tags">PyTorch &middot; TensorRT &middot; Profiling &middot; CUDA</span>
+        <span class="proj-header__date">Jun 2026</span>
+      </div>
+      <h1 class="proj-header__title">High-Speed Object Detection<br>&amp; Inference Optimization</h1>
+    </div>
+  </main>
+
+  <div class="proj-content">
+
+    <h2>Overview</h2>
+    <p>
+      Group project at T&eacute;l&eacute;com Paris (DSAI, 6 members) that benchmarks <strong>24 object detectors</strong> from five
+      architectural families &mdash; two-stage CNNs, YOLO, DETR, RT-DETR, and dense one-stage models &mdash; on a single
+      NVIDIA Tesla T4 GPU at batch size 1 in FP32. Rather than producing another accuracy/speed ranking, the goal was to
+      explain <em>why</em> one detector is slower than another by attributing end-to-end latency to individual operators
+      (convolution, normalization, activation, attention, pooling, post-processing).
+    </p>
+    <p>
+      The core hypothesis: at batch size 1, latency depends less on raw arithmetic (FLOPs) than on which operators run,
+      whether they are fused, how many kernels are launched, and how much data moves around. Every model was profiled
+      under a strict shared protocol &mdash; 640&times;640 COCO val2017 inputs, 50 warm-up runs, 1000 timed passes with
+      CUDA events, median latency, and pycocotools mAP at 50:95 &mdash; then pushed through the same optimization stack:
+      AMP FP16, Conv-BN fusion, torch.compile, and TensorRT.
+    </p>
+
+    <h2>My Contribution</h2>
+    <p>
+      I was responsible for the <strong>DETR family</strong> (DETR R50, Conditional DETR, DAB-DETR and Deformable DETR),
+      and I also wrote shared tooling used by the whole team: the <strong>latency harness</strong>, the <strong>COCO loader</strong>
+      and the <strong>evaluation path</strong>. I proposed the common experimental protocol (FP32, 640&times;640, batch size 1)
+      that every member adopted so that per-family results would be comparable.
+    </p>
+    <ul>
+      <li><strong>Operator-level analysis of the DETR backbone:</strong> identified that 28&ndash;32% of backbone time is lost to a FrozenBatchNorm block that is never folded into the preceding convolutions, because a custom module makes it invisible to PyTorch&rsquo;s standard fusion pass. Confirmed the finding with both <code>torch.profiler</code> traces and an NVIDIA Nsight Systems pass.</li>
+      <li><strong>Optimizations:</strong> AMP FP16, BatchNorm folding, and torch.compile. My DETR models reached speed-ups of <strong>2.34&times; (DETR R50), 2.31&times; (Conditional DETR), 2.13&times; (DAB-DETR) and 1.44&times; (Deformable DETR)</strong> with mAP preserved.</li>
+      <li><strong>TensorRT:</strong> implemented TensorRT engines for all of my models, plus additional optimizations not included in the report because they could not be compared against models from other team members within the deadline.</li>
+      <li><strong>Team coordination:</strong> organized the weekly meetings and kept the workload balanced across members &mdash; an organizational contribution I consider as important as the code itself.</li>
+    </ul>
+
+    <h2>Key Findings</h2>
+    <ul>
+      <li>Convolutions dominate backbones across all families, taking <strong>56&ndash;90%</strong> of backbone compute time &mdash; which makes them the easiest target for Tensor Core acceleration.</li>
+      <li>The DETR family is backbone-bound and loses 28&ndash;32% of backbone time to an unfused FrozenBatchNorm; Deformable DETR is the slowest model at 263 ms because its deformable attention falls back to a Python loop.</li>
+      <li>TensorRT FP16 gave the largest gains (e.g. 5.57&times; on RT-DETR R101) by fusing convolution, GEMM, residual and activation work into fewer kernels &mdash; beyond what precision change alone achieves.</li>
+      <li>Two-stage models split roughly half backbone / half head, with the head cost driven by RoIAlign and NMS rather than feature extraction.</li>
+    </ul>
+
+    <h2>Takeaways</h2>
+    <p>
+      The project taught me that agreeing on a shared measurement protocol from day one is the single most important
+      decision in a benchmarking study &mdash; we lost one to two weeks converging on a common harness. It also showed
+      that the real bottlenecks in GPU inference are memory movement and kernel launch overhead, not FLOPs, and that
+      every optimization must be validated at the operator level to know <em>where</em> the speed-up actually comes from.
+    </p>
+
+    <div class="proj-cta">
+      <a href="assets/dsai-detection-report.pdf" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+        Read Report
+      </a>
+      <a href="assets/dsai-detection-paper.pdf" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+        Read Paper
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copy">&copy; 2026 Antoine Besson.</p>
+      <p class="footer__tech">HTML / CSS / JS</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
