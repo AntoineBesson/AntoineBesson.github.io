@@ -40,13 +40,13 @@
     const cs = getComputedStyle(document.documentElement);
     const v = (n) => cs.getPropertyValue(n).trim();
     theme = {
-      bg: v("--clr-bg"), bgAlt: v("--clr-bg-alt"), ink: v("--clr-ink"),
-      muted: v("--clr-ink-muted"), light: v("--clr-border-light"), accent: v("--clr-accent"),
+      bg: v("--chip"), bgAlt: v("--ground-alt"), ink: v("--ink"),
+      muted: v("--ink-muted"), light: v("--rule-light"), accent: document.documentElement.getAttribute("data-theme") === "dark" ? v("--c-sign") : v("--c-road"), mark: v("--c-sign"),
     };
   }
   readTheme();
 
-  const MONO = '"IBM Plex Mono", ui-monospace, monospace';
+  const MONO = '"Martian Mono", ui-monospace, monospace';
 
   function label(ctx, text, x, y, dpr, opts) {
     const o = opts || {};
@@ -328,7 +328,7 @@
       const e = easeOut(p);
       const w = rc.w * e, h = rc.h * e, x = rc.cx - w / 2 + (rc.x + rc.w / 2 - rc.cx) * e, y = rc.cy - h / 2 + (rc.y + rc.h / 2 - rc.cy) * e;
       ctx.drawImage(frame, x, y, w, h, x, y, w, h);
-      ctx.strokeStyle = theme.accent; ctx.lineWidth = 1.5 * dpr;
+      ctx.strokeStyle = theme.mark; ctx.lineWidth = 1.5 * dpr;
       ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1);
     }
 
@@ -354,7 +354,7 @@
 
     function reticle(x, y, w, h) {
       const l = Math.min(w, h) * 0.22;
-      ctx.strokeStyle = theme.accent; ctx.lineWidth = 2 * dpr; ctx.lineCap = "square";
+      ctx.strokeStyle = theme.mark; ctx.lineWidth = 2 * dpr; ctx.lineCap = "square";
       ctx.beginPath();
       [[x, y, 1, 1], [x + w, y, -1, 1], [x, y + h, 1, -1], [x + w, y + h, -1, -1]].forEach(([px, py, sx, sy]) => {
         ctx.moveTo(px + sx * l, py); ctx.lineTo(px, py); ctx.lineTo(px, py + sy * l);
@@ -403,13 +403,13 @@
       }
       // path line + numbered fixations
       ctx.save();
-      ctx.strokeStyle = theme.accent; ctx.lineWidth = 1.5 * dpr; ctx.setLineDash([4 * dpr, 4 * dpr]);
+      ctx.strokeStyle = theme.mark; ctx.lineWidth = 1.5 * dpr; ctx.setLineDash([4 * dpr, 4 * dpr]);
       ctx.beginPath();
       pts.forEach((rc, i) => (i ? ctx.lineTo(rc.cx, rc.cy) : ctx.moveTo(rc.cx, rc.cy)));
       ctx.stroke(); ctx.restore();
       pts.forEach((rc, i) => {
-        ctx.fillStyle = theme.accent; ctx.beginPath(); ctx.arc(rc.cx, rc.cy, 9 * dpr, 0, TAU); ctx.fill();
-        ctx.fillStyle = "#fff"; ctx.font = `600 ${10 * dpr}px ${MONO}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillStyle = theme.mark; ctx.beginPath(); ctx.arc(rc.cx, rc.cy, 9 * dpr, 0, TAU); ctx.fill();
+        ctx.fillStyle = "#111317"; ctx.font = `600 ${10 * dpr}px ${MONO}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
         ctx.fillText(String(i + 1), rc.cx, rc.cy + 0.5 * dpr); ctx.textAlign = "left";
       });
 
@@ -460,7 +460,7 @@
         ctx.drawImage(tmp, 0, s0, W, Math.max(0.5, s1 - s0), 0, o, W, step);
       }
       // sampling lattice: where uniform source lines land after the warp
-      ctx.save(); ctx.strokeStyle = theme.accent; ctx.globalAlpha = 0.55; ctx.lineWidth = 1 * dpr;
+      ctx.save(); ctx.strokeStyle = theme.mark; ctx.globalAlpha = 0.55; ctx.lineWidth = 1 * dpr;
       ctx.beginPath();
       const fwd = (w, n, x) => lerp(x, (w.cdf[Math.round(x)] / w.cdf[n]) * n, a);
       for (let c = 1; c < 16; c++) { const x = fwd(warpX, W, (c * W) / 16); ctx.moveTo(x, 0); ctx.lineTo(x, H); }
@@ -505,6 +505,207 @@
     });
     cv.addEventListener("pointerleave", () => { hover = null; runner.request(); });
 
+  }
+
+
+  /* ===================================================
+     Hero: hand-annotated label map with a glimpse
+     =================================================== */
+  const LM_W = 1440, LM_H = 720;
+  const LM_CLASSES = {
+    road: [128, 64, 128], sidewalk: [244, 35, 232], building: [70, 70, 70], fence: [190, 153, 153],
+    pole: [153, 153, 153], sign: [220, 220, 0], vegetation: [107, 142, 35], sky: [70, 130, 180],
+    person: [220, 20, 60], rider: [255, 0, 0], car: [0, 0, 142], truck: [0, 0, 70], bus: [0, 60, 100],
+    motorcycle: [0, 0, 230],
+  };
+  const LM_ORDER = ["road", "sidewalk", "building", "vegetation", "sky", "car", "bus", "truck", "motorcycle", "person", "rider", "sign", "pole", "fence"];
+  // polygons in 1440x720 image coordinates, painted in order
+  const LM_POLYS = [["sky",[0,0,1440,0,1440,720,0,720]],["building",[0,0,390,0,390,40,370,90,520,105,530,300,560,420,560,500,0,500]],["building",[1150,0,1440,0,1440,620,880,620,890,190,985,165,1050,170,1120,215,1190,240]],["building",[800,330,870,330,880,500,800,500]],["vegetation",[160,330,260,290,350,285,460,310,520,290,560,250,640,240,670,130,730,20,800,8,860,30,930,90,960,150,945,250,905,330,880,420,860,500,780,500,700,490,600,500,460,525,200,505,160,430]],["vegetation",[840,0,895,0,905,560,870,560]],["road",[140,720,160,650,430,575,520,553,880,555,1040,575,1200,615,1180,660,1250,720]],["sidewalk",[1180,660,1200,618,1290,605,1440,595,1440,720,1250,720]],["sidewalk",[870,555,1040,560,1060,592,1040,592,880,575]],["fence",[0,640,140,615,150,720,0,720]],["bus",[0,128,110,150,125,200,122,600,60,640,0,660]],["car",[110,478,190,478,196,540,165,585,110,592]],["car",[160,520,200,490,300,482,370,485,405,520,420,610,402,660,330,666,300,640,190,650,160,622]],["car",[525,513,572,508,578,572,525,577]],["car",[783,493,860,493,866,568,790,573]],["car",[555,520,590,494,772,491,800,520,806,650,800,690,760,702,560,692,551,650]],["truck",[1330,465,1405,458,1405,580,1340,592]],["person",[418,520,520,518,522,562,420,566]],["person",[1395,470,1440,470,1440,600,1395,600]],["motorcycle",[1182,575,1262,568,1272,622,1186,628]],["rider",[1212,520,1252,520,1258,580,1215,585]],["motorcycle",[1042,612,1148,618,1166,690,1112,716,1044,702]],["rider",[1064,522,1100,512,1132,515,1152,560,1146,640,1110,662,1062,650,1052,600]],["pole",[205,0,222,0,140,420,126,420]],["pole",[950,60,962,60,978,582,966,582]],["pole",[1270,240,1282,240,1304,640,1292,640]],["pole",[160,590,195,590,192,705,166,705]],["pole",[905,445,911,445,911,578,905,578]],["sign",[1248,248,1282,248,1282,310,1248,310]],["sign",[1256,343,1290,343,1290,412,1256,412]],["sign",[893,423,921,423,921,451,893,451]],["sign",[896,462,919,462,919,489,896,489]],["sign",[1281,478,1319,478,1319,640,1281,640]]];
+  // where an idle viewer's attention goes: objects first, in image coordinates
+  const LM_TARGETS = [[680, 600], [1105, 600], [1265, 300], [290, 570], [905, 455], [60, 380], [780, 150], [1225, 590], [1370, 520], [470, 540]];
+
+  const rgb = (c, a) => (a == null ? `rgb(${c[0]},${c[1]},${c[2]})` : `rgba(${c[0]},${c[1]},${c[2]},${a})`);
+
+  function labelmapFigure(fig) {
+    const cv = fig.querySelector("canvas");
+    const ctx = cv.getContext("2d");
+    const bar = fig.nextElementSibling;
+    const legendEl = bar && bar.querySelector(".lm__legend");
+    const photo = new Image();
+    photo.decoding = "async";
+    photo.onload = () => { ready = true; runner.request(); };
+    photo.src = fig.dataset.image;
+
+    let W = 0, H = 0, dpr = 1, ready = false;
+    let s = 1, ox = 0, oy = 0; // cover transform image -> canvas
+    let t = 0, gaze = null, from = null, to = null, leg = 0, legT = 0, ti = 0;
+    let pointer = null, pointerUntil = -1, isolate = null;
+    let idx = null; // class index map for the glimpse readout
+    const IW = 360, IH = 180;
+    const names = Object.keys(LM_CLASSES);
+
+    // class index map at low resolution
+    (function buildIndex() {
+      const c = canvas(IW, IH), x = c.getContext("2d");
+      x.imageSmoothingEnabled = false;
+      x.scale(IW / LM_W, IH / LM_H);
+      LM_POLYS.forEach(([k, p]) => {
+        const i = names.indexOf(k) + 1;
+        x.fillStyle = `rgb(${i},0,0)`;
+        x.beginPath();
+        for (let j = 0; j < p.length; j += 2) (j ? x.lineTo(p[j], p[j + 1]) : x.moveTo(p[j], p[j + 1]));
+        x.closePath(); x.fill();
+      });
+      const d = x.getImageData(0, 0, IW, IH).data;
+      idx = new Uint8Array(IW * IH);
+      for (let i = 0; i < idx.length; i++) idx[i] = d[i * 4];
+    })();
+
+    // legend
+    const items = {};
+    if (legendEl) {
+      LM_ORDER.forEach((k) => {
+        const li = document.createElement("li");
+        li.dataset.in = "0";
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.innerHTML = `<span class="sw" style="--sw:${rgb(LM_CLASSES[k])}"></span>${k}<span class="pct">0%</span>`;
+        b.addEventListener("click", () => {
+          isolate = isolate === k ? null : k;
+          Object.entries(items).forEach(([kk, it]) => it.b.setAttribute("aria-pressed", String(kk === isolate)));
+          runner.request();
+        });
+        li.appendChild(b);
+        legendEl.appendChild(li);
+        items[k] = { li, b, pct: b.querySelector(".pct") };
+      });
+    }
+
+    const toCanvas = (x, y) => [ox + x * s, oy + y * s];
+    const toImage = (x, y) => [(x - ox) / s, (y - oy) / s];
+
+    function resize(w, h, d) {
+      W = w; H = h; dpr = d;
+      s = Math.max(W / LM_W, H / LM_H);
+      ox = (W - LM_W * s) / 2; oy = (H - LM_H * s) * 0.78; // keep the street level in view
+      if (!gaze) { gaze = LM_TARGETS[0].slice(); from = gaze.slice(); to = gaze.slice(); }
+    }
+
+    function poly(p) {
+      ctx.beginPath();
+      for (let j = 0; j < p.length; j += 2) {
+        const [x, y] = toCanvas(p[j], p[j + 1]);
+        j ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.closePath();
+    }
+
+    function paintMap(reveal) {
+      ctx.save();
+      if (reveal < 1) { ctx.beginPath(); ctx.rect(0, 0, W * reveal, H); ctx.clip(); }
+      LM_POLYS.forEach(([k, p]) => {
+        const dim = isolate && k !== isolate;
+        ctx.fillStyle = dim ? rgb(LM_CLASSES[k].map((v) => Math.round(v * 0.25 + 40))) : rgb(LM_CLASSES[k]);
+        poly(p); ctx.fill();
+        ctx.strokeStyle = "rgba(0,0,0,0.28)"; ctx.lineWidth = 1 * dpr; ctx.lineJoin = "round"; ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    function stats(x0, y0, x1, y1) {
+      const cnt = new Array(names.length + 1).fill(0);
+      const a = Math.max(0, Math.floor((x0 / LM_W) * IW)), b = Math.min(IW, Math.ceil((x1 / LM_W) * IW));
+      const c = Math.max(0, Math.floor((y0 / LM_H) * IH)), d = Math.min(IH, Math.ceil((y1 / LM_H) * IH));
+      let n = 0;
+      for (let y = c; y < d; y++) for (let x = a; x < b; x++) { cnt[idx[y * IW + x]]++; n++; }
+      const out = {};
+      names.forEach((k, i) => (out[k] = n ? cnt[i + 1] / n : 0));
+      return out;
+    }
+
+    function update(dt) {
+      const now = t;
+      if (pointer && now < pointerUntil) {
+        const k = 1 - Math.exp(-dt / 70);
+        gaze[0] = lerp(gaze[0], pointer[0], k); gaze[1] = lerp(gaze[1], pointer[1], k);
+        from = gaze.slice(); to = gaze.slice(); legT = now; leg = 0;
+        return;
+      }
+      const SAC = 520, DWELL = 1500;
+      if (now - legT > SAC + DWELL) {
+        from = gaze.slice();
+        ti = (ti + 1) % LM_TARGETS.length;
+        to = LM_TARGETS[ti].slice();
+        legT = now;
+      }
+      const e = easeInOut(seg(now - legT, 0, SAC));
+      gaze[0] = lerp(from[0], to[0], e); gaze[1] = lerp(from[1], to[1], e);
+    }
+
+    function draw(now, dt) {
+      if (!W) return;
+      if (!REDUCED) t += dt;
+      update(REDUCED ? 1000 : dt);
+      const reveal = REDUCED ? 1 : easeOut(seg(t, 0, 1100));
+
+      ctx.fillStyle = "#464646"; ctx.fillRect(0, 0, W, H);
+      paintMap(reveal);
+      if (reveal < 1) {
+        ctx.fillStyle = theme.mark || "#dcdc00";
+        ctx.fillRect(W * reveal - 2 * dpr, 0, 3 * dpr, H);
+        return true;
+      }
+
+      // glimpse: the photo through a square window
+      const side = Math.max(Math.min(W, H) * 0.42, 120 * dpr) / s; // in image px
+      const gx0 = clamp(gaze[0] - side / 2, 0, LM_W - side), gy0 = clamp(gaze[1] - side / 2, 0, LM_H - side);
+      const [cx0, cy0] = toCanvas(gx0, gy0);
+      const cs = side * s;
+      const fade = REDUCED ? 1 : seg(t, 1100, 1500);
+      if (ready) {
+        ctx.save(); ctx.globalAlpha = fade;
+        ctx.drawImage(photo, gx0 * (photo.naturalWidth / LM_W), gy0 * (photo.naturalHeight / LM_H),
+          side * (photo.naturalWidth / LM_W), side * (photo.naturalHeight / LM_H), cx0, cy0, cs, cs);
+        ctx.restore();
+      }
+      ctx.save(); ctx.globalAlpha = fade;
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.5 * dpr;
+      ctx.strokeRect(cx0 + 0.75 * dpr, cy0 + 0.75 * dpr, cs - 1.5 * dpr, cs - 1.5 * dpr);
+      const L = cs * 0.14;
+      ctx.strokeStyle = theme.mark || "#dcdc00"; ctx.lineWidth = 3 * dpr; ctx.beginPath();
+      [[cx0, cy0, 1, 1], [cx0 + cs, cy0, -1, 1], [cx0, cy0 + cs, 1, -1], [cx0 + cs, cy0 + cs, -1, -1]].forEach(([x, y, sx, sy]) => {
+        ctx.moveTo(x + sx * L, y); ctx.lineTo(x, y); ctx.lineTo(x, y + sy * L);
+      });
+      ctx.stroke();
+
+      // readout: top classes inside the glimpse
+      const st = stats(gx0, gy0, gx0 + side, gy0 + side);
+      const top = Object.entries(st).filter(([, v]) => v > 0.01).sort((a, b) => b[1] - a[1]).slice(0, 3);
+      const text = top.map(([k, v]) => `${k} ${Math.round(v * 100)}%`).join("  ");
+      const below = cy0 + cs + 26 * dpr < H;
+      label(ctx, text, clamp(cx0, 6 * dpr, W - 6 * dpr), below ? cy0 + cs + 6 * dpr : cy0 - 26 * dpr, dpr,
+        { bg: "#ffffff", color: "#111317", bgAlpha: 1, size: 10, weight: 500, align: cx0 > W * 0.6 ? "right" : undefined });
+      ctx.restore();
+
+      Object.entries(items).forEach(([k, it]) => {
+        const p = Math.round((st[k] || 0) * 100);
+        it.pct.textContent = p + "%";
+        it.li.dataset.in = p > 0 ? "1" : "0";
+      });
+      return true;
+    }
+
+    const runner = mount(cv, { resize, draw });
+
+    cv.addEventListener("pointermove", (e) => {
+      if (e.pointerType === "touch") return;
+      const r = cv.getBoundingClientRect();
+      pointer = toImage(((e.clientX - r.left) / r.width) * W, ((e.clientY - r.top) / r.height) * H);
+      pointerUntil = t + 1800;
+      runner.request();
+    });
+    cv.addEventListener("pointerleave", () => { pointerUntil = t + 600; runner.request(); });
   }
 
   /* ===================================================
@@ -744,7 +945,7 @@
   new MutationObserver(() => { readTheme(); runners.forEach((r) => r.request()); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-  const KINDS = { glimpse: glimpseFigure, heston: hestonFigure, gesture: gestureFigure };
+  const KINDS = { labelmap: labelmapFigure, glimpse: glimpseFigure, heston: hestonFigure, gesture: gestureFigure };
   document.querySelectorAll("[data-figure]").forEach((fig) => {
     const k = KINDS[fig.dataset.figure];
     if (k) k(fig);
