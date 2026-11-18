@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -51,9 +51,10 @@
     </div>
   </main>
 
-  <div class="proj-hero-img">
-    <img src="assets/trading-bot-cover.png" alt="Multi-Strategy Trading Bot architecture overview" />
-  </div>
+  <figure class="anim-fig anim-fig--hero" data-figure="heston">
+    <canvas role="img" aria-label="Animated Monte Carlo simulation: 48 price paths under the Heston stochastic volatility model fan out over time, with the distribution of prices on the right and the variance of one path below."></canvas>
+    <figcaption><span class="fig-num">Figure 1.</span> Monte Carlo paths under the Heston model, the engine behind the options pricing. Volatility is itself random and mean-reverting, and its negative correlation with price (&rho; &lt; 0) skews the distribution on the right. Illustrative parameters.</figcaption>
+  </figure>
 
   <div class="proj-content">
 
@@ -69,10 +70,6 @@
       <li><strong>Vectorised Batch Processing:</strong> Highly optimised data alignment and path bundle generation for the LSM solver keeps spread bootstrapping execution under a few hundred milliseconds.</li>
     </ul>
 
-    <div class="fig">
-      <img src="assets/heston-model-example.png" alt="Heston Model Volatility Surface" />
-      <p class="fig__caption">Fig 1: Implied Volatility Surface modelled via the Heston engine.</p>
-    </div>
 
     <h2>System Architecture</h2>
     <p>
@@ -84,10 +81,6 @@
       To aggressively mitigate curve-fitting, the framework incorporates advanced robustness tests rather than relying solely on historical equity curves. This includes permutation testing (separating overnight gaps from intraday moves), synthetic data stress testing (injecting Brownian motion jumps), and Monte Carlo equity cones to calculate precise risk-of-ruin probabilities.
     </p>
 
-    <div class="fig">
-      <img src="assets/backtesting-monte-carlo.png" alt="Monte Carlo Equity Cones Backtesting" />
-      <p class="fig__caption">Fig 2: Monte Carlo Equity Cones generating projected risk-of-ruin metrics.</p>
-    </div>
 
     <div class="proj-cta">
       <a href="https://github.com/AntoineBesson" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
@@ -108,5 +101,6 @@
   </footer>
 
   <script src="../script.js"></script>
+  <script src="../figures.js" defer></script>
 </body>
 </html>

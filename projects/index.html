@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -44,7 +44,6 @@
   <section class="allprojects-section">
     <div class="allprojects-section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">All</span>
         <h2 class="section__title">Projects</h2>
       </header>
 
@@ -54,6 +53,22 @@
           <span class="projects-table__col-label">Stack</span>
           <span class="projects-table__col-label">Year</span>
         </div>
+
+        <a href="active-vision.html" class="projects-table__row">
+          <div class="projects-table__name">
+            <span class="projects-table__index">00</span>
+            <div>
+              <h3 class="projects-table__title">Active Vision on Reduced Hardware</h3>
+              <p class="projects-table__desc">In progress. Foveated video segmentation on a single T4: a low-resolution context view, high-resolution glimpses and a gaze policy, tested against the full-frame accuracy&ndash;latency curve.</p>
+            </div>
+          </div>
+          <div class="projects-table__tech">
+            <span class="ptag">PyTorch</span>
+            <span class="ptag">Segmentation</span>
+            <span class="ptag">CUDA</span>
+          </div>
+          <div class="projects-table__year">2026</div>
+        </a>
 
         <a href="gesture-recognition.html" class="projects-table__row">
           <div class="projects-table__name">
@@ -115,5 +130,6 @@
   </footer>
 
   <script src="../script.js"></script>
+  <script src="../figures.js" defer></script>
 </body>
 </html>

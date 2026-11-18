@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Antoine Besson — Data Science & AI Engineer. Portfolio showcasing projects, experience, and skills." />
+  <meta name="description" content="Antoine Besson, Data Science &amp; AI engineer at T&eacute;l&eacute;com Paris. Current research on foveated video segmentation under a fixed GPU budget, plus projects and experience." />
   <title>Antoine Besson | Data Science &amp; AI Engineer</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -19,6 +19,7 @@
 
       <nav class="navbar__links" id="navLinks">
         <a href="#about" class="navbar__link">About</a>
+        <a href="#research" class="navbar__link">Research</a>
         <a href="#education" class="navbar__link">Education</a>
         <a href="#projects" class="navbar__link">Projects</a>
         <a href="#experience" class="navbar__link">Experience</a>
@@ -55,11 +56,6 @@
   <section class="hero" id="hero">
     <div class="hero__container">
 
-      <div class="hero__meta">
-        <span>Portfolio &mdash; 2026</span>
-        <span class="hero__meta-dot"></span>
-        <span>T&eacute;l&eacute;com Paris MSc AI</span>
-      </div>
 
       <div class="hero__body">
         <div class="hero__name-block">
@@ -90,14 +86,12 @@
       </div>
 
     </div>
-    <div class="hero__index-number" aria-hidden="true">00</div>
   </section>
 
   <!-- ===================== ABOUT ===================== -->
   <section class="section" id="about">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">01</span>
         <h2 class="section__title">About</h2>
       </header>
       <div class="about__grid">
@@ -128,11 +122,80 @@
     </div>
   </section>
 
+  <!-- ===================== RESEARCH ===================== -->
+  <section class="section" id="research">
+    <div class="section__container">
+      <header class="section__header">
+        <h2 class="section__title">Current research</h2>
+      </header>
+
+      <article class="research">
+        <div class="research__head">
+          <h3 class="research__title">Active Vision on Reduced Hardware</h3>
+          <p class="research__status">In progress &middot; 2026</p>
+        </div>
+
+        <p class="research__lede">
+          Can a segmentation model look at less of each frame and still see enough? I add a foveation layer on top of
+          existing real-time backbones (PIDNet-S, BiSeNetV2): a low-resolution context view, high-resolution glimpses
+          picked by a gaze policy, and optionally a persistent memory of the scene. Each variant is judged end to end on a
+          single T4 GPU against the full-frame accuracy&ndash;latency curve on Cityscapes-VPS video.
+        </p>
+
+        <figure class="research-fig" data-figure="glimpse" data-images="">
+          <canvas role="img" aria-label="Animated illustration of the foveated segmentation pipeline on a street scene: a low-resolution context view, an uncertainty score per grid cell, and high-resolution glimpses on the most uncertain cells."></canvas>
+          <div class="research-fig__controls" role="group" aria-label="Pipeline variant">
+            <button type="button" data-mode="full" aria-pressed="false">Full frame</button>
+            <button type="button" data-mode="glimpse" aria-pressed="true">Context + glimpses</button>
+            <button type="button" data-mode="warp" aria-pressed="false">Warped resampling</button>
+          </div>
+          <figcaption><span class="fig-num">Figure 1.</span> <span data-note></span></figcaption>
+        </figure>
+
+        <div class="research__body">
+          <div>
+            <h4>Findings so far</h4>
+            <dl class="findings">
+              <div>
+                <dt><strong>Method 1</strong>Full frame</dt>
+                <dd><span class="verdict verdict--ok">Reference.</span>The pipeline reproduces the published Cityscapes val scores of both backbones (PIDNet-S 78.76 vs 78.8, BiSeNetV2 74.95 vs 74.95).</dd>
+              </div>
+              <div>
+                <dt><strong>Method 2</strong>Glimpses, no memory</dt>
+                <dd><span class="verdict verdict--neg">Negative.</span>The best configuration (0.5 context + 4 glimpses of 384&nbsp;px) is &minus;0.5 mIoU at equal latency, about 7.7&nbsp;ms slower at equal mIoU.</dd>
+              </div>
+              <div>
+                <dt><strong>Method 3</strong>Motion-gated reuse</dt>
+                <dd><span class="verdict verdict--neg">Negative.</span>Deciding what to recompute costs about 6.8&nbsp;ms, and a one-frame-old prediction already loses about 5 points.</dd>
+              </div>
+              <div>
+                <dt><strong>Method 4</strong>Persistent canvas</dt>
+                <dd><span class="verdict verdict--neg">Stopped.</span>Even a free oracle selector reaches only &minus;0.85 mIoU at equal latency, against a +1.0 pass rule fixed before the runs.</dd>
+              </div>
+            </dl>
+          </div>
+          <div>
+            <h4>What it says</h4>
+            <p>
+              On a T4, a full frame at a slightly higher scale is cheap, and glimpses lack the context the backbone needs.
+              The ceiling is the glimpse itself: a frozen model on crops stays below the same model on the whole frame,
+              whatever is selected or remembered. The next question is whether a single pass on a non-uniformly
+              resampled frame (no crops, no second pass) can escape that ceiling.
+            </p>
+            <div class="research__links">
+              <a href="projects/active-vision.html" class="btn btn--primary">Project page</a>
+              <a href="https://github.com/AntoineBesson/Active-Vision-on-reduced-hardware" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Code &amp; results</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- ===================== EDUCATION ===================== -->
   <section class="section" id="education">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">02</span>
         <h2 class="section__title">Education</h2>
       </header>
 
@@ -182,7 +245,6 @@
   <section class="section" id="projects">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">03</span>
         <h2 class="section__title">Projects</h2>
       </header>
 
@@ -256,7 +318,6 @@
   <section class="section" id="experience">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">04</span>
         <h2 class="section__title">Experience</h2>
       </header>
 
@@ -310,7 +371,6 @@
   <section class="section" id="skills">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">05</span>
         <h2 class="section__title">Skills</h2>
       </header>
 
@@ -353,5 +413,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="figures.js" defer></script>
 </body>
 </html>

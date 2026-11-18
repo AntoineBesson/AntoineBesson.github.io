@@ -1,6 +1,5 @@
 /* ===================================================
-   script.js — Theme Toggle, Mobile Menu, Active Link,
-   Scroll Reveal
+   script.js — Theme Toggle, Mobile Menu, Active Link
    =================================================== */
 
 (function () {
@@ -75,25 +74,5 @@
     sections.forEach((section) => navObserver.observe(section));
   }
 
-  // ———————————— Scroll Reveal ————————————
-  const revealEls = document.querySelectorAll(
-    ".edu-table__row, .projects-table__row, .skills-list__row"
-  );
-
-  if (revealEls.length) {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    revealEls.forEach((el) => revealObserver.observe(el));
-  }
 
 })();
