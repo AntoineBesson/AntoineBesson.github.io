@@ -529,8 +529,7 @@
   function labelmapFigure(fig) {
     const cv = fig.querySelector("canvas");
     const ctx = cv.getContext("2d");
-    const bar = fig.nextElementSibling;
-    const legendEl = bar && bar.querySelector(".lm__legend");
+    const legendEl = fig.parentElement.querySelector(".lm__legend");
     const photo = new Image();
     photo.decoding = "async";
     photo.onload = () => { ready = true; runner.request(); };

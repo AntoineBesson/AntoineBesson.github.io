@@ -325,11 +325,22 @@ img {
 }
 
 .lm__legend {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-bottom: var(--sp-2);
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
   list-style: none;
-  margin-left: -0.5rem;
+  transform: translateX(-0.5rem);
+}
+
+.edu-table__description .inline-link {
+  border-bottom: 1.5px solid var(--accent);
+}
+
+.edu-table__description .inline-link:hover {
+  color: var(--accent);
 }
 
 .lm__legend button {
@@ -1407,7 +1418,7 @@ img {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    margin-right: calc(var(--sp-2) * -1);
+    transform: none;
   }
 
   .lm__legend li {
