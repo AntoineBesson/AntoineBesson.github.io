@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <header class="navbar" id="navbar">
     <div class="navbar__container">
-      <a href="../index.html" class="navbar__logo">A. Besson</a>
+      <a href="../index.html" class="navbar__logo">Antoine Besson</a>
       <div class="navbar__actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
           <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -34,7 +34,7 @@
     </div>
   </header>
 
-  <main class="proj-header">
+  <main class="proj-header proj-header--person">
     <div class="proj-header__container">
       <nav class="proj-header__breadcrumb">
         <a href="../index.html">Antoine Besson</a>
@@ -61,6 +61,11 @@
     <p>
       NeuroCalc is a real-time hand gesture recognition system that interprets arithmetic operations (digits 0&ndash;9 and operators +, &minus;, &times;, &divide;, =) performed with both hands in front of a webcam. The hands are modelled as a dynamic graph of 42 vertices extracted by MediaPipe, projected into a canonical rotation-invariant reference frame, and classified by a Spatio-Temporal Graph Convolutional Network (ST-GCN). The system reaches 93.65% validation accuracy on a custom 15-class dataset and runs at 30 FPS on CPU thanks to an asynchronous strided inference engine that reduces compute load by approximately 75%.
     </p>
+
+    <figure class="anim-fig" data-figure="gesture">
+      <canvas role="img" aria-label="Animated hand skeletons: two hands of 21 keypoints change finger poses while a signal propagates from the wrist along the graph edges, with dotted temporal edges linking each fingertip across recent frames."></canvas>
+      <figcaption><span class="fig-num">Figure 1.</span> The input as the ST-GCN sees it: 42 keypoints joined by spatial edges (solid) and by temporal edges to the same joint in earlier frames (dotted). The red pulse is one round of graph convolution spreading out from the wrist.</figcaption>
+    </figure>
 
     <h2>Motivation</h2>
     <p>
@@ -113,11 +118,13 @@
 
   <footer class="footer">
     <div class="footer__container">
-      <p class="footer__copy">&copy; 2026 Antoine Besson.</p>
+      <p class="footer__cta"><a href="mailto:antoine.besson@telecom-paris.fr">Email me</a></p>
+      <p class="footer__copy">&copy; 2026 Antoine Besson</p>
       <p class="footer__tech">HTML / CSS / JS</p>
     </div>
   </footer>
 
   <script src="../script.js"></script>
+  <script src="../figures.js" defer></script>
 </body>
 </html>

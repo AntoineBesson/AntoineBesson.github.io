@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Antoine Besson — Data Science & AI Engineer. Portfolio showcasing projects, experience, and skills." />
-  <title>Antoine Besson | Data Science &amp; AI Engineer</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Antoine Besson, Data Science &amp; AI engineer at T&eacute;l&eacute;com Paris. Current research on foveated video segmentation under a fixed GPU budget, plus projects and experience." />
+  <title>Antoine Besson | Data Science &amp; AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- ===================== NAVBAR ===================== -->
   <header class="navbar" id="navbar">
     <div class="navbar__container">
-      <a href="#hero" class="navbar__logo">A. Besson</a>
+      <a href="#hero" class="navbar__logo">Antoine Besson</a>
 
-      <nav class="navbar__links" id="navLinks">
-        <a href="#about" class="navbar__link">About</a>
-        <a href="#education" class="navbar__link">Education</a>
-        <a href="#projects" class="navbar__link">Projects</a>
-        <a href="#experience" class="navbar__link">Experience</a>
-        <a href="#skills" class="navbar__link">Skills</a>
+      <nav class="navbar__links" id="navLinks" aria-label="Sections">
+        <a href="#research" class="navbar__link"><span class="sw sw--road" aria-hidden="true"></span>Research</a>
+        <a href="#projects" class="navbar__link"><span class="sw sw--car" aria-hidden="true"></span>Projects</a>
+        <a href="#about" class="navbar__link"><span class="sw sw--person" aria-hidden="true"></span>About</a>
+        <a href="#experience" class="navbar__link"><span class="sw sw--building" aria-hidden="true"></span>Experience</a>
+        <a href="#education" class="navbar__link"><span class="sw sw--veg" aria-hidden="true"></span>Education</a>
+        <a href="#skills" class="navbar__link"><span class="sw sw--sky" aria-hidden="true"></span>Skills</a>
       </nav>
 
       <div class="navbar__actions">
@@ -51,53 +52,174 @@
     </div>
   </header>
 
+  <main>
+
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero">
-    <div class="hero__container">
-
-      <div class="hero__meta">
-        <span>Portfolio &mdash; 2026</span>
-        <span class="hero__meta-dot"></span>
-        <span>T&eacute;l&eacute;com Paris MSc AI</span>
-      </div>
-
-      <div class="hero__body">
-        <div class="hero__name-block">
-          <h1 class="hero__name">Antoine<br>Besson</h1>
-          <div class="hero__discipline-block">
-            <span class="hero__accent-bar"></span>
-            <p class="hero__discipline">Data Science<br>&amp; Artificial<br>Intelligence</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__footer">
+    <div class="hero__head">
+      <h1 class="hero__name">Antoine Besson</h1>
+      <div class="hero__aside">
         <p class="hero__statement">
-          Building rigorous systems at the intersection of<br>
-          mathematics, machine learning, and quantitative finance.
+          Data science and AI engineering at T&eacute;l&eacute;com Paris. I work on computer vision under tight
+          compute budgets, and on quantitative methods in finance.
         </p>
         <div class="hero__cta">
-          <a href="mailto:antoine.besson@telecom-paris.fr" class="btn btn--primary">
-            Contact
-          </a>
-          <a href="https://github.com/AntoineBesson" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
+          <a href="mailto:antoine.besson@telecom-paris.fr" class="btn btn--primary">Email me</a>
+          <a href="https://github.com/AntoineBesson" class="btn btn--outline" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
-
     </div>
-    <div class="hero__index-number" aria-hidden="true">00</div>
+
+    <figure class="lm" data-figure="labelmap" data-image="assets/research/street-saigon.jpg">
+      <canvas role="img" aria-label="A street in Ho Chi Minh City drawn as a semantic segmentation label map: road in purple, buildings in grey, trees in olive, cars in blue, riders in red. A square glimpse moves across it and shows the real photograph inside."></canvas>
+    </figure>
+    <div class="lm__bar">
+      <ul class="lm__legend" aria-label="Classes inside the glimpse"></ul>
+      <p class="lm__caption">Hand-annotated label map of a street in Ho Chi Minh City. Move your cursor over it to look through a glimpse, or pick a class to isolate it.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RESEARCH ===================== -->
+  <section class="section field field--road" id="research">
+    <div class="section__container">
+      <header class="section__header">
+        <span class="sw" aria-hidden="true"></span>
+        <h2 class="section__title">Current research</h2>
+      </header>
+
+      <article class="research">
+        <div class="research__head">
+          <h3 class="research__title">Active Vision on Reduced Hardware</h3>
+          <p class="research__status">In progress &middot; 2026</p>
+        </div>
+
+        <p class="research__lede">
+          Can a segmentation model look at less of each frame and still see enough? I add a foveation layer on top of
+          existing real-time backbones (PIDNet-S, BiSeNetV2): a low-resolution context view, high-resolution glimpses
+          picked by a gaze policy, and optionally a persistent memory of the scene. Each variant is judged end to end on a
+          single T4 GPU against the full-frame accuracy&ndash;latency curve on Cityscapes-VPS video.
+        </p>
+
+        <figure class="research-fig" data-figure="glimpse" data-images="assets/research/street-saigon.jpg">
+          <canvas role="img" aria-label="Animated illustration of the foveated segmentation pipeline on a street photo: a low-resolution context view, an uncertainty score per grid cell, and high-resolution glimpses on the most uncertain cells."></canvas>
+          <div class="research-fig__controls" role="group" aria-label="Pipeline variant">
+            <button type="button" data-mode="full" aria-pressed="false">Full frame</button>
+            <button type="button" data-mode="glimpse" aria-pressed="true">Context + glimpses</button>
+            <button type="button" data-mode="warp" aria-pressed="false">Warped resampling</button>
+          </div>
+          <figcaption><span class="fig-num">Figure 1.</span> <span data-note></span></figcaption>
+        </figure>
+
+        <div class="research__body">
+          <div>
+            <h4>Findings so far</h4>
+            <dl class="findings">
+              <div>
+                <dt><strong>Method 1</strong>Full frame</dt>
+                <dd><span class="verdict">Reference</span>The pipeline reproduces the published Cityscapes val scores of both backbones (PIDNet-S 78.76 vs 78.8, BiSeNetV2 74.95 vs 74.95).</dd>
+              </div>
+              <div>
+                <dt><strong>Method 2</strong>Glimpses, no memory</dt>
+                <dd><span class="verdict verdict--neg">Negative</span>The best configuration (0.5 context + 4 glimpses of 384&nbsp;px) is &minus;0.5 mIoU at equal latency, about 7.7&nbsp;ms slower at equal mIoU.</dd>
+              </div>
+              <div>
+                <dt><strong>Method 3</strong>Motion-gated reuse</dt>
+                <dd><span class="verdict verdict--neg">Negative</span>Deciding what to recompute costs about 6.8&nbsp;ms, and a one-frame-old prediction already loses about 5 points.</dd>
+              </div>
+              <div>
+                <dt><strong>Method 4</strong>Persistent canvas</dt>
+                <dd><span class="verdict verdict--neg">Stopped</span>Even a free oracle selector reaches only &minus;0.85 mIoU at equal latency, against a +1.0 pass rule fixed before the runs.</dd>
+              </div>
+            </dl>
+          </div>
+          <div>
+            <h4>What it says</h4>
+            <p>
+              On a T4, a full frame at a slightly higher scale is cheap, and glimpses lack the context the backbone needs.
+              The ceiling is the glimpse itself: a frozen model on crops stays below the same model on the whole frame,
+              whatever is selected or remembered. The next question is whether a single pass on a non-uniformly
+              resampled frame (no crops, no second pass) can escape that ceiling.
+            </p>
+            <div class="research__links">
+              <a href="projects/active-vision.html" class="btn btn--primary">Project page</a>
+              <a href="https://github.com/AntoineBesson/Active-Vision-on-reduced-hardware" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Code &amp; results</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section" id="projects">
+    <div class="section__container">
+      <header class="section__header">
+        <span class="sw sw--car" aria-hidden="true"></span>
+        <h2 class="section__title">Projects</h2>
+      </header>
+
+      <div class="projects-table">
+        <a href="projects/detection-inference-optimization.html" class="projects-table__row row--car">
+          <div class="projects-table__name">
+            <span class="sw" aria-hidden="true"></span>
+            <div>
+              <h3 class="projects-table__title">Object Detection Inference Optimization</h3>
+              <p class="projects-table__desc">Operator-level latency profiling of 24 object detectors on a Tesla T4 with AMP, Conv-BN fusion and TensorRT optimizations reaching up to 5.6&times; speed-ups. I covered the DETR family and the shared benchmarking tooling.</p>
+            </div>
+          </div>
+          <div class="projects-table__tech">
+            <span class="ptag">PyTorch</span>
+            <span class="ptag">TensorRT</span>
+            <span class="ptag">CUDA</span>
+          </div>
+          <div class="projects-table__year">2026</div>
+        </a>
+
+        <a href="projects/gesture-recognition.html" class="projects-table__row row--person">
+          <div class="projects-table__name">
+            <span class="sw" aria-hidden="true"></span>
+            <div>
+              <h3 class="projects-table__title">Real-Time Hand Gesture Recognition</h3>
+              <p class="projects-table__desc">ST-GCN model for dual-hand arithmetic gesture classification. 93.6% accuracy, &lt;10ms CPU inference per frame via asynchronous strided inference.</p>
+            </div>
+          </div>
+          <div class="projects-table__tech">
+            <span class="ptag">PyTorch</span>
+            <span class="ptag">MediaPipe</span>
+            <span class="ptag">ST-GCN</span>
+          </div>
+          <div class="projects-table__year">2026</div>
+        </a>
+
+        <a href="projects/trading-bot.html" class="projects-table__row row--building">
+          <div class="projects-table__name">
+            <span class="sw" aria-hidden="true"></span>
+            <div>
+              <h3 class="projects-table__title">Multi-Strategy Trading Bot</h3>
+              <p class="projects-table__desc">Quantitative trading framework with Heston stochastic volatility model and vectorised backtesting engine achieving 2,000&times; acceleration.</p>
+            </div>
+          </div>
+          <div class="projects-table__tech">
+            <span class="ptag">Python</span>
+            <span class="ptag">NumPy</span>
+            <span class="ptag">Docker</span>
+          </div>
+          <div class="projects-table__year">2025</div>
+        </a>
+      </div>
+
+      <div class="projects-table__footer">
+        <a href="projects/index.html" class="link-arrow">All projects</a>
+      </div>
+    </div>
   </section>
 
   <!-- ===================== ABOUT ===================== -->
   <section class="section" id="about">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">01</span>
+        <span class="sw sw--person" aria-hidden="true"></span>
         <h2 class="section__title">About</h2>
       </header>
       <div class="about__grid">
@@ -106,7 +228,7 @@
             src="assets/photo_cv_11_02_2026_compressée (1).jpg"
             alt="Antoine Besson"
             class="about__image"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
           />
           <div class="about__image-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
@@ -128,135 +250,11 @@
     </div>
   </section>
 
-  <!-- ===================== EDUCATION ===================== -->
-  <section class="section" id="education">
-    <div class="section__container">
-      <header class="section__header">
-        <span class="section__number" aria-hidden="true">02</span>
-        <h2 class="section__title">Education</h2>
-      </header>
-
-      <div class="edu-table">
-
-        <div class="edu-table__row">
-          <div class="edu-table__period">
-            <span class="edu-table__year-range">2023 &mdash; 2026</span>
-          </div>
-          <div class="edu-table__body">
-            <h3 class="edu-table__institution">Institut Polytechnique T&eacute;l&eacute;com Paris</h3>
-            <p class="edu-table__degree">Master of Engineering &mdash; Data Science &amp; AI</p>
-            <p class="edu-table__description">Specialisation in machine learning, deep learning, and large-scale data systems.</p>
-            <ul class="edu-table__courses">
-              <li>Machine Learning &amp; Deep Learning</li>
-              <li>Statistical Modelling &amp; Inference</li>
-              <li>Natural Language Processing</li>
-              <li>Computer Vision</li>
-              <li>Big Data &amp; Distributed Computing</li>
-              <li>Optimisation &amp; Operations Research</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="edu-table__row">
-          <div class="edu-table__period">
-            <span class="edu-table__year-range">2021 &mdash; 2023</span>
-          </div>
-          <div class="edu-table__body">
-            <h3 class="edu-table__institution">IPESUP</h3>
-            <p class="edu-table__degree">Preparatory Classes &mdash; MPSI / MP*</p>
-            <p class="edu-table__description">Intensive two-year programme in advanced mathematics, physics, and computer science preparing for the Grandes &Eacute;coles entrance examinations.</p>
-            <ul class="edu-table__courses">
-              <li>Advanced Mathematics (Algebra, Analysis, Topology)</li>
-              <li>Classical &amp; Quantum Physics</li>
-              <li>Algorithms &amp; Data Structures</li>
-              <li>Probability &amp; Statistics</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PROJECTS ===================== -->
-  <section class="section" id="projects">
-    <div class="section__container">
-      <header class="section__header">
-        <span class="section__number" aria-hidden="true">03</span>
-        <h2 class="section__title">Projects</h2>
-      </header>
-
-      <div class="projects-table">
-        <div class="projects-table__header">
-          <span class="projects-table__col-label">Project</span>
-          <span class="projects-table__col-label">Stack</span>
-          <span class="projects-table__col-label">Year</span>
-        </div>
-
-        <a href="projects/trading-bot.html" class="projects-table__row">
-          <div class="projects-table__name">
-            <span class="projects-table__index">01</span>
-            <div>
-              <h3 class="projects-table__title">Multi-Strategy Trading Bot</h3>
-              <p class="projects-table__desc">Quantitative trading framework with Heston stochastic volatility model and vectorised backtesting engine achieving 2,000&times; acceleration.</p>
-            </div>
-          </div>
-          <div class="projects-table__tech">
-            <span class="ptag">Python</span>
-            <span class="ptag">NumPy</span>
-            <span class="ptag">Docker</span>
-          </div>
-          <div class="projects-table__year">2025</div>
-        </a>
-
-        <a href="projects/gesture-recognition.html" class="projects-table__row">
-          <div class="projects-table__name">
-            <span class="projects-table__index">02</span>
-            <div>
-              <h3 class="projects-table__title">Real-Time Hand Gesture Recognition</h3>
-              <p class="projects-table__desc">ST-GCN model for dual-hand arithmetic gesture classification. 93.6% accuracy, &lt;10ms CPU inference per frame via asynchronous strided inference.</p>
-            </div>
-          </div>
-          <div class="projects-table__tech">
-            <span class="ptag">PyTorch</span>
-            <span class="ptag">MediaPipe</span>
-            <span class="ptag">ST-GCN</span>
-          </div>
-          <div class="projects-table__year">2026</div>
-        </a>
-
-        <a href="projects/detection-inference-optimization.html" class="projects-table__row">
-          <div class="projects-table__name">
-            <span class="projects-table__index">03</span>
-            <div>
-              <h3 class="projects-table__title">Object Detection Inference Optimization</h3>
-              <p class="projects-table__desc">Operator-level latency profiling of 24 object detectors on a Tesla T4 with AMP, Conv-BN fusion and TensorRT optimizations reaching up to 5.6&times; speed-ups. I covered the DETR family and the shared benchmarking tooling.</p>
-            </div>
-          </div>
-          <div class="projects-table__tech">
-            <span class="ptag">PyTorch</span>
-            <span class="ptag">TensorRT</span>
-            <span class="ptag">CUDA</span>
-          </div>
-          <div class="projects-table__year">2026</div>
-        </a>
-
-      </div>
-
-      <div class="projects-table__footer">
-        <a href="projects/index.html" class="link-arrow">
-          View all projects &#8594;
-        </a>
-      </div>
-
-    </div>
-  </section>
-
   <!-- ===================== EXPERIENCE ===================== -->
   <section class="section" id="experience">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">04</span>
+        <span class="sw sw--building" aria-hidden="true"></span>
         <h2 class="section__title">Experience</h2>
       </header>
 
@@ -264,21 +262,21 @@
 
         <div class="edu-table__row">
           <div class="edu-table__period">
-            <span class="edu-table__year-range">Sep 2026 &mdash; Feb 2027</span>
+            <span class="edu-table__year-range">Sep 2026 &ndash; Feb 2027</span>
           </div>
           <div class="edu-table__body">
-            <h3 class="edu-table__institution">Quantitative Research Intern &mdash; BDL Capital Management</h3>
+            <h3 class="edu-table__institution">Quantitative Research Intern, BDL Capital Management</h3>
             <p class="edu-table__degree">Quantitative Research</p>
           </div>
         </div>
 
         <div class="edu-table__row">
           <div class="edu-table__period">
-            <span class="edu-table__year-range">Nov 2024 &mdash; Feb 2026</span>
+            <span class="edu-table__year-range">Nov 2024 &ndash; Feb 2026</span>
           </div>
           <div class="edu-table__body">
-            <h3 class="edu-table__institution">Treasurer &mdash; Forum T&eacute;l&eacute;com Paris</h3>
-            <p class="edu-table__degree">Student Organisation &mdash; T&eacute;l&eacute;com Paris</p>
+            <h3 class="edu-table__institution">Treasurer, Forum T&eacute;l&eacute;com Paris</h3>
+            <p class="edu-table__degree">Student Organisation, T&eacute;l&eacute;com Paris</p>
             <p class="edu-table__description">Led the financial strategy for the largest student-run corporate networking event at T&eacute;l&eacute;com Paris.</p>
             <ul class="edu-table__highlights">
               <li>Drove a <strong>30% increase in sponsorship revenue</strong> by restructuring partnership tiers and outreach strategy.</li>
@@ -293,7 +291,7 @@
             <span class="edu-table__year-range">Summer 2024</span>
           </div>
           <div class="edu-table__body">
-            <h3 class="edu-table__institution">HR Assistant Intern &mdash; BNP Paribas</h3>
+            <h3 class="edu-table__institution">HR Assistant Intern, BNP Paribas</h3>
             <p class="edu-table__degree">Human Resources Department</p>
             <p class="edu-table__description">Supported the HR analytics team in modernising internal reporting workflows.</p>
             <ul class="edu-table__highlights">
@@ -306,11 +304,61 @@
     </div>
   </section>
 
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="section" id="education">
+    <div class="section__container">
+      <header class="section__header">
+        <span class="sw sw--veg" aria-hidden="true"></span>
+        <h2 class="section__title">Education</h2>
+      </header>
+
+      <div class="edu-table">
+
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">2023 &ndash; 2026</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">Institut Polytechnique T&eacute;l&eacute;com Paris</h3>
+            <p class="edu-table__degree">Master of Engineering, Data Science &amp; AI</p>
+            <p class="edu-table__description">Specialisation in machine learning, deep learning, and large-scale data systems.</p>
+            <ul class="edu-table__courses">
+              <li>Machine Learning &amp; Deep Learning</li>
+              <li>Statistical Modelling &amp; Inference</li>
+              <li>Natural Language Processing</li>
+              <li>Computer Vision</li>
+              <li>Big Data &amp; Distributed Computing</li>
+              <li>Optimisation &amp; Operations Research</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="edu-table__row">
+          <div class="edu-table__period">
+            <span class="edu-table__year-range">2021 &ndash; 2023</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">IPESUP</h3>
+            <p class="edu-table__degree">Preparatory Classes, MPSI / MP*</p>
+            <p class="edu-table__description">Intensive two-year programme in advanced mathematics, physics, and computer science preparing for the Grandes &Eacute;coles entrance examinations.</p>
+            <ul class="edu-table__courses">
+              <li>Advanced Mathematics (Algebra, Analysis, Topology)</li>
+              <li>Classical &amp; Quantum Physics</li>
+              <li>Algorithms &amp; Data Structures</li>
+              <li>Probability &amp; Statistics</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== SKILLS ===================== -->
   <section class="section" id="skills">
     <div class="section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">05</span>
+        <span class="sw sw--sky" aria-hidden="true"></span>
         <h2 class="section__title">Skills</h2>
       </header>
 
@@ -332,26 +380,24 @@
           <span class="skills-list__items">Git, Docker, LaTeX</span>
         </div>
       </div>
-
     </div>
   </section>
+
+  </main>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="footer__container">
-      <p class="footer__copy">&copy; 2026 Antoine Besson.</p>
-      <p class="footer__tech">HTML / CSS / JS</p>
+      <p class="footer__cta"><a href="mailto:antoine.besson@telecom-paris.fr">Email me</a></p>
       <div class="footer__links">
-        <a href="https://github.com/AntoineBesson" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="GitHub">
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="LinkedIn">
-          LinkedIn
-        </a>
+        <a href="https://github.com/AntoineBesson" target="_blank" rel="noopener noreferrer" class="footer__social">GitHub</a>
+        <a href="https://www.linkedin.com/in/antoine-besson-0a02b0335/" target="_blank" rel="noopener noreferrer" class="footer__social">LinkedIn</a>
       </div>
+      <p class="footer__copy">&copy; 2026 Antoine Besson &middot; antoine.besson@telecom-paris.fr &middot; Street photo: Ho Chi Minh City, licence plates blurred.</p>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script src="figures.js" defer></script>
 </body>
 </html>

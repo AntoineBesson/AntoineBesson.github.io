@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Active Vision on Reduced Hardware: foveated video segmentation on a single T4 GPU. Research in progress by Antoine Besson." />
+  <title>Active Vision on Reduced Hardware | Antoine Besson</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="../index.html" class="navbar__logo">Antoine Besson</a>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon icon--moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="proj-header proj-header--road">
+    <div class="proj-header__container">
+      <nav class="proj-header__breadcrumb">
+        <a href="../index.html">Antoine Besson</a>
+        <span class="proj-header__breadcrumb-sep" aria-hidden="true">/</span>
+        <a href="index.html">Projects</a>
+        <span class="proj-header__breadcrumb-sep" aria-hidden="true">/</span>
+        <span>Active Vision</span>
+      </nav>
+      <div class="proj-header__meta">
+        <span class="proj-header__tags">PyTorch &middot; Segmentation &middot; T4 latency &middot; Cityscapes-VPS</span>
+        <span class="proj-header__date">In progress &middot; 2026</span>
+      </div>
+      <h1 class="proj-header__title">Active Vision<br>on Reduced Hardware</h1>
+    </div>
+  </main>
+
+  <div class="proj-content">
+
+    <h2>Question</h2>
+    <p>
+      Video segmentation models usually spend the same compute on every pixel of every frame. Human vision does not:
+      a sharp fovea moves across a blurry periphery. This project asks whether a segmentation model on a single
+      T4-class GPU (16&nbsp;GB) can do the same, look at less of each frame, and still match the full frame at equal
+      latency. It uses public data only.
+    </p>
+    <p>
+      I do not build a new segmentation model. I add a layer on top of existing real-time backbones, PIDNet-S and
+      BiSeNetV2: preprocessing (a low-resolution context view plus high-resolution crops), an optional persistent scene
+      memory (a canvas), and a gaze policy that chooses which regions to inspect.
+    </p>
+
+    <figure class="research-fig" data-figure="glimpse" data-images="../assets/research/street-saigon.jpg">
+      <canvas role="img" aria-label="Animated illustration of the foveated segmentation pipeline on a street scene."></canvas>
+      <div class="research-fig__controls" role="group" aria-label="Pipeline variant">
+        <button type="button" data-mode="full" aria-pressed="false">Full frame</button>
+        <button type="button" data-mode="glimpse" aria-pressed="true">Context + glimpses</button>
+        <button type="button" data-mode="warp" aria-pressed="false">Warped resampling</button>
+      </div>
+      <figcaption><span class="fig-num">Figure 1.</span> <span data-note></span> The uncertainty drawn here is a stand-in computed in your browser (detail lost by the context view), not the model&rsquo;s entropy.</figcaption>
+    </figure>
+
+    <h2>Protocol</h2>
+    <ul>
+      <li><strong>Data:</strong> Cityscapes-VPS. Tuning on VPS train (400 clips, 2,400 labelled frames), reporting once on VPS val (50 clips, 300 labelled frames), on finalists frozen beforehand.</li>
+      <li><strong>Metric:</strong> 19-class mIoU, with 95% clip bootstrap intervals paired against the full frame on the same clips.</li>
+      <li><strong>Latency:</strong> the judge is a Tesla T4 at batch 1, FP16, with CUDA graphs. Eager mode is launch-bound, so graphs are required for any comparison to mean something.</li>
+      <li><strong>Rule:</strong> a foveated variant wins only if it lands above the full-frame mIoU&ndash;latency curve. Pass rules are written down before the runs.</li>
+    </ul>
+
+    <h3>The reference curve</h3>
+    <p>Full-frame mIoU on VPS val as the input is downscaled. The foveated context view runs at these low scales, so how gracefully a backbone degrades matters.</p>
+    <div class="table-scroll">
+      <table class="ref-table">
+        <thead>
+          <tr><th>Pixel fraction</th><th>1.0</th><th>0.56</th><th>0.25</th><th>0.14</th><th>0.06</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PIDNet-S</td><td>71.5</td><td>70.1</td><td>64.8</td><td>58.6</td><td>50.1</td></tr>
+          <tr><td>BiSeNetV2</td><td>70.4</td><td>69.9</td><td>67.6</td><td>64.3</td><td>59.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>On the T4, a full frame costs 19.4&nbsp;ms (PIDNet-S) and 31.2&nbsp;ms (BiSeNetV2).</p>
+
+    <h2>Methods and results</h2>
+    <dl class="findings">
+      <div>
+        <dt><strong>Method 1</strong>Full frame</dt>
+        <dd><span class="verdict verdict--ok">Reference.</span>The data layer, ported backbones and evaluation harness reproduce the published Cityscapes val numbers (PIDNet-S 78.76 vs 78.8, BiSeNetV2 74.95 vs 74.95).</dd>
+      </div>
+      <div>
+        <dt><strong>Method 2</strong>Glimpses, no memory</dt>
+        <dd><span class="verdict verdict--neg">Negative.</span>46 of 55 finalists fall below the full-frame curve on val, and the other 9 are dominated. The best (BiSeNetV2, 0.5 context + 4 fused 384&nbsp;px glimpses) is &minus;0.5 mIoU at equal latency, about 7.7&nbsp;ms slower at equal mIoU.</dd>
+      </div>
+      <div>
+        <dt><strong>Method 3</strong>Motion-gated reuse</dt>
+        <dd><span class="verdict verdict--neg">Negative on train.</span>None of 1,296 configurations per model beats the curve. Deciding what to recompute costs about 6.8&nbsp;ms, a frame-old prediction loses about 5 points, and motion is a poor proxy for error.</dd>
+      </div>
+      <div>
+        <dt><strong>Method 4</strong>Persistent canvas</dt>
+        <dd><span class="verdict verdict--neg">Stopped at the bound.</span>With a greedy oracle selector that costs nothing, none of 693 configurations reaches the curve. Best: &minus;0.85 mIoU at equal latency against a +1.0 pass rule, so the learned policy was not built.</dd>
+      </div>
+    </dl>
+
+    <h2>What I take from it</h2>
+    <p>
+      The glimpse is the ceiling. A frozen model on crops stays below the same model on the whole frame at scale 0.75,
+      whatever is selected or remembered, and on a T4 that slightly larger full frame is cheap. Negative results with
+      a fixed protocol are still results: each one rules out a family of designs before anyone spends a month training
+      a policy for it.
+    </p>
+
+    <h2>Next</h2>
+    <ul>
+      <li>An oracle bound for a single pass on a non-uniformly resampled frame: no crops, no second pass (the &ldquo;Warped resampling&rdquo; view in Figure 1).</li>
+      <li>The same readings on an embedded GPU, where only the latency tables change.</li>
+    </ul>
+
+    <div class="proj-cta">
+      <a href="https://github.com/AntoineBesson/Active-Vision-on-reduced-hardware" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+        Code &amp; results
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__cta"><a href="mailto:antoine.besson@telecom-paris.fr">Email me</a></p>
+      <p class="footer__copy">&copy; 2026 Antoine Besson</p>
+      <p class="footer__tech">HTML / CSS / JS</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="../figures.js" defer></script>
+</body>
+</html>

@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <header class="navbar" id="navbar">
     <div class="navbar__container">
-      <a href="../index.html" class="navbar__logo">A. Besson</a>
+      <a href="../index.html" class="navbar__logo">Antoine Besson</a>
       <div class="navbar__actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
           <svg class="icon icon--sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -36,15 +36,14 @@
 
   <div class="page-header">
     <div class="page-header__inner">
-      <a href="../index.html" class="page-header__back">&#8592; Antoine Besson</a>
-      <span class="page-header__title">All Projects</span>
+      <a href="../index.html" class="page-header__back">Back to Antoine Besson</a>
+      <h1 class="page-header__title">All projects</h1>
     </div>
   </div>
 
   <section class="allprojects-section">
     <div class="allprojects-section__container">
       <header class="section__header">
-        <span class="section__number" aria-hidden="true">All</span>
         <h2 class="section__title">Projects</h2>
       </header>
 
@@ -55,9 +54,25 @@
           <span class="projects-table__col-label">Year</span>
         </div>
 
-        <a href="gesture-recognition.html" class="projects-table__row">
+        <a href="active-vision.html" class="projects-table__row row--road">
           <div class="projects-table__name">
-            <span class="projects-table__index">01</span>
+            <span class="sw" aria-hidden="true"></span>
+            <div>
+              <h3 class="projects-table__title">Active Vision on Reduced Hardware</h3>
+              <p class="projects-table__desc">In progress. Foveated video segmentation on a single T4: a low-resolution context view, high-resolution glimpses and a gaze policy, tested against the full-frame accuracy&ndash;latency curve.</p>
+            </div>
+          </div>
+          <div class="projects-table__tech">
+            <span class="ptag">PyTorch</span>
+            <span class="ptag">Segmentation</span>
+            <span class="ptag">CUDA</span>
+          </div>
+          <div class="projects-table__year">2026</div>
+        </a>
+
+        <a href="gesture-recognition.html" class="projects-table__row row--person">
+          <div class="projects-table__name">
+            <span class="sw" aria-hidden="true"></span>
             <div>
               <h3 class="projects-table__title">NeuroCalc: Dual Hands Arithmetic Recognition</h3>
               <p class="projects-table__desc">Real-time hand gesture recognition system interpreting arithmetic operations with both hands. ST-GCN model with 93.65% accuracy and asynchronous strided inference at 30 FPS on CPU.</p>
@@ -71,9 +86,9 @@
           <div class="projects-table__year">2026</div>
         </a>
 
-        <a href="trading-bot.html" class="projects-table__row">
+        <a href="trading-bot.html" class="projects-table__row row--building">
           <div class="projects-table__name">
-            <span class="projects-table__index">02</span>
+            <span class="sw" aria-hidden="true"></span>
             <div>
               <h3 class="projects-table__title">Multi-Strategy Trading Bot</h3>
               <p class="projects-table__desc">High-performance algorithmic trading system combining multiple quantitative strategies with a fully vectorised backtesting engine achieving 2,000&times; acceleration.</p>
@@ -87,9 +102,9 @@
           <div class="projects-table__year">2025</div>
         </a>
 
-        <a href="detection-inference-optimization.html" class="projects-table__row">
+        <a href="detection-inference-optimization.html" class="projects-table__row row--car">
           <div class="projects-table__name">
-            <span class="projects-table__index">03</span>
+            <span class="sw" aria-hidden="true"></span>
             <div>
               <h3 class="projects-table__title">Object Detection Inference Optimization</h3>
               <p class="projects-table__desc">Operator-level latency profiling of 24 object detectors on a Tesla T4 with AMP, Conv-BN fusion and TensorRT optimizations reaching up to 5.6&times; speed-ups. I covered the DETR family and the shared benchmarking tooling.</p>
@@ -109,11 +124,13 @@
 
   <footer class="footer">
     <div class="footer__container">
-      <p class="footer__copy">&copy; 2026 Antoine Besson.</p>
+      <p class="footer__cta"><a href="mailto:antoine.besson@telecom-paris.fr">Email me</a></p>
+      <p class="footer__copy">&copy; 2026 Antoine Besson</p>
       <p class="footer__tech">HTML / CSS / JS</p>
     </div>
   </footer>
 
   <script src="../script.js"></script>
+  <script src="../figures.js" defer></script>
 </body>
 </html>
