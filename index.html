@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=labelmap-1" />
+  <link rel="stylesheet" href="style.css?v=labelmap-2" />
 </head>
 <body>
 
@@ -20,7 +20,6 @@
       <nav class="navbar__links" id="navLinks" aria-label="Sections">
         <a href="#research" class="navbar__link"><span class="sw sw--road" aria-hidden="true"></span>Research</a>
         <a href="#projects" class="navbar__link"><span class="sw sw--car" aria-hidden="true"></span>Projects</a>
-        <a href="#about" class="navbar__link"><span class="sw sw--person" aria-hidden="true"></span>About</a>
         <a href="#experience" class="navbar__link"><span class="sw sw--building" aria-hidden="true"></span>Experience</a>
         <a href="#education" class="navbar__link"><span class="sw sw--veg" aria-hidden="true"></span>Education</a>
         <a href="#skills" class="navbar__link"><span class="sw sw--sky" aria-hidden="true"></span>Skills</a>
@@ -71,13 +70,10 @@
       </div>
     </div>
 
+    <ul class="lm__legend" aria-label="Classes inside the glimpse. Pick one to isolate it on the label map."></ul>
     <figure class="lm" data-figure="labelmap" data-image="assets/research/street-saigon.jpg">
       <canvas role="img" aria-label="A street in Ho Chi Minh City drawn as a semantic segmentation label map: road in purple, buildings in grey, trees in olive, cars in blue, riders in red. A square glimpse moves across it and shows the real photograph inside."></canvas>
     </figure>
-    <div class="lm__bar">
-      <ul class="lm__legend" aria-label="Classes inside the glimpse"></ul>
-      <p class="lm__caption">Hand-annotated label map of a street in Ho Chi Minh City. Move your cursor over it to look through a glimpse, or pick a class to isolate it.</p>
-    </div>
   </section>
 
   <!-- ===================== RESEARCH ===================== -->
@@ -215,41 +211,6 @@
     </div>
   </section>
 
-  <!-- ===================== ABOUT ===================== -->
-  <section class="section" id="about">
-    <div class="section__container">
-      <header class="section__header">
-        <span class="sw sw--person" aria-hidden="true"></span>
-        <h2 class="section__title">About</h2>
-      </header>
-      <div class="about__grid">
-        <div class="about__image-wrapper">
-          <img
-            src="assets/photo_cv_11_02_2026_compressée (1).jpg"
-            alt="Antoine Besson"
-            class="about__image"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
-          />
-          <div class="about__image-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="about__text">
-          <p>
-            I am a Data Science &amp; AI Engineering student at T&eacute;l&eacute;com Paris with a strong foundation in mathematics from MPSI/MP* preparatory classes. I am passionate about building intelligent systems that solve real-world problems.
-          </p>
-          <p>
-            My interests span machine learning, quantitative finance, and computer vision. I enjoy turning complex data into actionable insights and shipping production-ready solutions.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===================== EXPERIENCE ===================== -->
   <section class="section" id="experience">
     <div class="section__container">
@@ -262,11 +223,32 @@
 
         <div class="edu-table__row">
           <div class="edu-table__period">
+            <span class="edu-table__year-range">Upcoming</span>
+          </div>
+          <div class="edu-table__body">
+            <h3 class="edu-table__institution">Research Intern, CanViT-2</h3>
+            <p class="edu-table__degree">Active vision research, Mitacs</p>
+            <p class="edu-table__description">CanViT-2 extends <a class="inline-link" href="https://github.com/m2b3/CanViT" target="_blank" rel="noopener noreferrer">CanViT</a>, an active vision model inspired by the human eye. The exact topic is still open, because the field moves fast. These are the research questions from my Mitacs application, which I will lead:</p>
+            <ul class="edu-table__highlights">
+              <li><strong>Which retina does an active observer learn, in static and dynamic scenes?</strong> For a fixed budget of regions, what layout of positions and sizes does CanViT-2 adopt when the layout is optimized together with the model, on images and on video? Does a fovea emerge, and does motion shift resolution towards the periphery? Cheung et al. found that the fovea faded when the sensor could also zoom; I test whether a fovea emerges when CanViT-2 can change the scale of its whole retina between observations, and when it cannot.</li>
+              <li><strong>What does CanViT-2 remember about parts of a changing scene it no longer observes, and can it represent its uncertainty?</strong> On simulated scenes with ground truth, how accurately does it track hidden objects and extrapolate unobserved motion over time, compared with ideal observers and simple baselines? Can a small generative head, trained by flow matching in DINOv3 feature space and conditioned on the canvas, produce calibrated samples of what is hidden where the true distribution of outcomes is known?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="edu-table__row">
+          <div class="edu-table__period">
             <span class="edu-table__year-range">Sep 2026 &ndash; Feb 2027</span>
           </div>
           <div class="edu-table__body">
             <h3 class="edu-table__institution">Quantitative Research Intern, BDL Capital Management</h3>
             <p class="edu-table__degree">Quantitative Research</p>
+            <ul class="edu-table__highlights">
+              <li>Reworked the <strong>stress tests</strong> (crisis simulations) and <strong>performance attribution</strong>.</li>
+              <li>Studied <strong>allocation across strategies</strong> and the optimal rebalancing frequency.</li>
+              <li>Ran <strong>alpha research and data mining</strong>, from basic transformations to machine learning.</li>
+              <li>In progress, on my own initiative and approved by my supervisor: a <strong>platform that centralises the creation of strategies and allocations</strong>, connected to an MCP server.</li>
+            </ul>
           </div>
         </div>
 
@@ -282,20 +264,6 @@
               <li>Drove a <strong>30% increase in sponsorship revenue</strong> by restructuring partnership tiers and outreach strategy.</li>
               <li>Achieved a <strong>50% reduction in operational costs</strong> through vendor renegotiation and streamlined budgeting.</li>
               <li>Managed a <strong>six-figure budget</strong>, delivering full financial reporting to the board.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="edu-table__row">
-          <div class="edu-table__period">
-            <span class="edu-table__year-range">Summer 2024</span>
-          </div>
-          <div class="edu-table__body">
-            <h3 class="edu-table__institution">HR Assistant Intern, BNP Paribas</h3>
-            <p class="edu-table__degree">Human Resources Department</p>
-            <p class="edu-table__description">Supported the HR analytics team in modernising internal reporting workflows.</p>
-            <ul class="edu-table__highlights">
-              <li><strong>Automated data reporting</strong> pipelines, reducing manual processing time and improving data quality.</li>
             </ul>
           </div>
         </div>
@@ -397,7 +365,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=labelmap-1"></script>
-  <script src="figures.js?v=labelmap-1" defer></script>
+  <script src="script.js?v=labelmap-2"></script>
+  <script src="figures.js?v=labelmap-2" defer></script>
 </body>
 </html>
