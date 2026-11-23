@@ -117,19 +117,29 @@
         <dt><strong>Method 4</strong>Persistent canvas</dt>
         <dd><span class="verdict verdict--neg">Stopped at the bound.</span>With a greedy oracle selector that costs nothing, none of 693 configurations reaches the curve. Best: &minus;0.85 mIoU at equal latency against a +1.0 pass rule, so the learned policy was not built.</dd>
       </div>
+      <div>
+        <dt><strong>Method 5</strong>Warped resampling</dt>
+        <dd><span class="verdict verdict--neg">Negative.</span>One pass on a non-uniformly resampled frame. With an oracle warp, scale 0.25 beats the full frame at the same scale by +1.25 (PIDNet-S) and +1.80 (BiSeNetV2) on train, just above the +1.0 rule. Timed on the T4, a warp chosen each frame costs 1.45&nbsp;ms or more, 2 to 8 times the budget, so only a fixed warp fits. On val, read once, no finalist&rsquo;s 95% interval at equal latency is above zero. Closed on 2026-11-17.</dd>
+      </div>
+      <div>
+        <dt><strong>Method 6</strong>Local 2-D warp</dt>
+        <dd><span class="verdict verdict--neg">Stopped at the bound.</span>A free 2-D warp can magnify a region without stretching its whole row and column. With an oracle saliency, the best 2-D configuration is 0.03 to 0.62 points below Method 5&rsquo;s separable warp at every scale and for both models, against a +0.5 rule, and strong local warps cost up to 5.4 points.</dd>
+      </div>
     </dl>
 
     <h2>What I take from it</h2>
     <p>
       The glimpse is the ceiling. A frozen model on crops stays below the same model on the whole frame at scale 0.75,
-      whatever is selected or remembered, and on a T4 that slightly larger full frame is cheap. Negative results with
+      whatever is selected or remembered, and on a T4 that slightly larger full frame is cheap. Warping the frame
+      instead of cropping it helps a little at the same input size (up to +0.8 points with a fixed warp), but never
+      clearly beats a full frame given the same time, and a free 2-D warp does no better. Negative results with
       a fixed protocol are still results: each one rules out a family of designs before anyone spends a month training
       a policy for it.
     </p>
 
     <h2>Next</h2>
     <ul>
-      <li>An oracle bound for a single pass on a non-uniformly resampled frame: no crops, no second pass (the &ldquo;Warped resampling&rdquo; view in Figure 1).</li>
+      <li>In progress, on train only: guided upsampling of low-scale predictions, and choosing the input scale frame by frame.</li>
       <li>The same readings on an embedded GPU, where only the latency tables change.</li>
     </ul>
 
@@ -150,6 +160,6 @@
   </footer>
 
   <script src="../script.js?v=labelmap-2"></script>
-  <script src="../figures.js?v=labelmap-2" defer></script>
+  <script src="../figures.js?v=labelmap-3" defer></script>
 </body>
 </html>

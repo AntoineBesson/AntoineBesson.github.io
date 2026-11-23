@@ -127,6 +127,14 @@
                 <dt><strong>Method 4</strong>Persistent canvas</dt>
                 <dd><span class="verdict verdict--neg">Stopped</span>Even a free oracle selector reaches only &minus;0.85 mIoU at equal latency, against a +1.0 pass rule fixed before the runs.</dd>
               </div>
+              <div>
+                <dt><strong>Method 5</strong>Warped resampling</dt>
+                <dd><span class="verdict verdict--neg">Negative</span>An oracle warp passes narrowly on train (+1.25 and +1.80 mIoU at scale 0.25), but only a fixed warp fits the T4 budget, and on val no finalist clearly beats the full frame given the same time.</dd>
+              </div>
+              <div>
+                <dt><strong>Method 6</strong>Local 2-D warp</dt>
+                <dd><span class="verdict verdict--neg">Stopped</span>Even with an oracle, the best 2-D warp stays 0.03 to 0.62 points below Method 5&rsquo;s separable warp, against a +0.5 pass rule.</dd>
+              </div>
             </dl>
           </div>
           <div>
@@ -134,8 +142,8 @@
             <p>
               On a T4, a full frame at a slightly higher scale is cheap, and glimpses lack the context the backbone needs.
               The ceiling is the glimpse itself: a frozen model on crops stays below the same model on the whole frame,
-              whatever is selected or remembered. The next question is whether a single pass on a non-uniformly
-              resampled frame (no crops, no second pass) can escape that ceiling.
+              whatever is selected or remembered. A single pass on a warped frame avoids crops, and a fixed warp gains up
+              to +0.8 points at the same input size, but a full frame given the same time does as well.
             </p>
             <div class="research__links">
               <a href="projects/active-vision.html" class="btn btn--primary">Project page</a>

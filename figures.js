@@ -194,7 +194,7 @@
     },
     warp: {
       hud: "Idea · not started",
-      note: "Next idea: a single pass on a non-uniformly resampled frame. Uncertain regions get more pixels and the rest is compressed. No crops, no second pass. Not implemented yet.",
+      note: "Method 5: a single pass on a non-uniformly resampled frame. Uncertain regions get more pixels and the rest is compressed. No crops, no second pass. Tested: it does not beat the full frame on a T4.",
     },
   };
 
